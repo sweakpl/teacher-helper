@@ -1,0 +1,73 @@
+<resources>
+    <string name="app_name" translatable="false">Teacher Helper</string>
+    <string name="edit_note">Edit Note</string>
+    <string name="add_note">Add Note</string>
+    <string name="insert_title_and_description">Insert title and description</string>
+    <string name="notes">Notes</string>
+    <string name="schedule">Schedule</string>
+    <string name="groups">Groups</string>
+    <string name="note_saved">Note saved</string>
+    <string name="note_not_saved">Note not saved</string>
+    <string name="cant_update_note">Note couldn\'t be updated</string>
+    <string name="note_updated">Note updated</string>
+    <string name="note_not_edited">Note not edited</string>
+    <string name="hint_title">Title</string>
+    <string name="hint_description">Description</string>
+    <string name="add_icon_description">Add icon</string>
+    <string name="menu_icon" translatable="false">⋮</string>
+    <string name="save">Save</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="monday">Mon</string>
+    <string name="tuesday">Tue</string>
+    <string name="wednesday">Wed</string>
+    <string name="thursday">Thu</string>
+    <string name="friday">Fri</string>
+    <string name="hint_time_start">Time start</string>
+    <string name="hint_time_end">Time end</string>
+    <string name="edit_activity">Edit Activity</string>
+    <string name="add_activity">Add Activity</string>
+    <string name="insert_activity_and_time">Insert activity and time</string>
+    <string name="schedule_saved">Schedule saved</string>
+    <string name="schedule_not_saved">Schedule not saved</string>
+    <string name="cant_update_schedule">Schedule couldn\'t be updated</string>
+    <string name="schedule_updated">Schedule updated</string>
+    <string name="schedule_not_edited">Schedule not updated</string>
+    <string name="hint_name">Name</string>
+    <string name="group_saved">Group saved</string>
+    <string name="group_not_saved">Group not saved</string>
+    <string name="cant_update_group">Group couldn\'t be updated</string>
+    <string name="group_updated">Group updated</string>
+    <string name="group_not_edited">Group not edited</string>
+    <string name="edit_group">Edit group</string>
+    <string name="add_group">Add group</string>
+    <string name="insert_name">Insert name</string>
+    <string name="student_saved">Student saved</string>
+    <string name="student_not_saved">Student not saved</string>
+    <string name="cant_update_student">Student couldn\'t be updated</string>
+    <string name="student_updated">Student updated</string>
+    <string name="student_not_edited">Student not updated</string>
+    <string name="hint_first_name">First name</string>
+    <string name="hint_last_name">Last name</string>
+    <string name="hint_class_name">Class name</string>
+    <string name="edit_student">Edit student</string>
+    <string name="add_student">Add student</string>
+    <string name="insert_full_name_and_class">Insert full name and class name</string>
+    <string name="start_control_session">Start control session</string>
+    <string name="full_name">Full name</string>
+    <string name="function_indicator">Activity / Missing kit</string>
+    <string name="missing_kit">Missing kit</string>
+    <string name="activity">Activity</string>
+    <string name="activities_saved">Activities saved</string>
+    <string name="activities_not_saved">Activities not saved</string>
+    <string name="all_data_will_be_lost">All related data will be lost</string>
+    <string name="missing_kit_count">Missing kit count: %1$d</string>
+    <string name="full_name_template" translatable="false">%1$s %2$s</string>
+    <string name="schedule_time_template" translatable="false">%1$s - %2$s</string>
+
+    <string-array name="activity_grades">
+        <item> </item>
+        <item>+</item>
+        <item>-</item>
+    </string-array>
+</resources>

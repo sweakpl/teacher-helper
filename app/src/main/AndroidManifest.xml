@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.sweak.teacherhelper">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.TeacherNotebook">
+        <activity
+            android:name=".ui.activity.MainActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.TeacherNotebook.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.activity.AddEditGroupActivity"
+            android:parentActivityName=".ui.activity.MainActivity" />
+        <activity
+            android:name=".ui.activity.AddEditScheduleActivity"
+            android:parentActivityName=".ui.activity.MainActivity" />
+        <activity
+            android:name=".ui.activity.AddEditNoteActivity"
+            android:parentActivityName=".ui.activity.MainActivity" />
+        <activity
+            android:name=".ui.activity.StudentActivity"
+            android:launchMode="singleTop"
+            android:parentActivityName=".ui.activity.MainActivity" />
+        <activity
+            android:name=".ui.activity.AddEditStudentActivity"
+            android:parentActivityName=".ui.activity.StudentActivity" />
+        <activity
+            android:name=".ui.activity.StudentControlActivity"
+            android:parentActivityName=".ui.activity.StudentActivity" />
+        <activity
+            android:name=".ui.activity.StudentActivitiesActivity"
+            android:parentActivityName=".ui.activity.StudentActivity"/>
+    </application>
+
+</manifest>
