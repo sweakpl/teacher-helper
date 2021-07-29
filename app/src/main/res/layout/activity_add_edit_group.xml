@@ -7,11 +7,17 @@
     android:padding="16dp"
     tools:context=".ui.activity.AddEditGroupActivity">
 
-    <EditText
-        android:id="@+id/edit_text_name"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_name"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:hint="@string/hint_name" />
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint="@string/hint_name"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

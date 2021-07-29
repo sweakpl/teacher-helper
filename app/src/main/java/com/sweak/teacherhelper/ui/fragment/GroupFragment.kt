@@ -125,7 +125,7 @@ class GroupFragment : Fragment() {
     private fun showOptionsMenu(position: Int) {
         val popupMenu = PopupMenu(requireContext(),
             binding.recyclerViewGroups[position].findViewById(R.id.text_view_group_options))
-        popupMenu.inflate(R.menu.edit_delete_options_menu)
+        popupMenu.inflate(R.menu.edit_delete_menu)
 
         popupMenu.setOnMenuItemClickListener(object : PopupMenu.OnMenuItemClickListener {
             override fun onMenuItemClick(item: MenuItem?): Boolean {
@@ -166,6 +166,9 @@ class GroupFragment : Fragment() {
     private fun setViewModelDataObserver() {
         groupViewModel.allGroups.observe(viewLifecycleOwner, { groups ->
             groupAdapter.setGroups(groups)
+
+            binding.textViewEmptyIndicator.visibility =
+                if (groups.isEmpty()) View.VISIBLE else View.GONE
         })
     }
 

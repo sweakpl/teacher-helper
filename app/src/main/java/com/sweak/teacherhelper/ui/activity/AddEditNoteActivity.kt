@@ -34,8 +34,8 @@ class AddEditNoteActivity : AppCompatActivity() {
 
     private fun prepareForEditingIfNeeded() {
         if (intent.hasExtra(EXTRA_ID)) {
-            binding.editTextTitle.setText(intent.getStringExtra(EXTRA_TITLE))
-            binding.editTextDescription.setText(intent.getStringExtra(EXTRA_DESCRIPTION))
+            binding.textInputTitle.editText!!.setText(intent.getStringExtra(EXTRA_TITLE))
+            binding.textInputDescription.editText!!.setText(intent.getStringExtra(EXTRA_DESCRIPTION))
         }
     }
 
@@ -50,8 +50,8 @@ class AddEditNoteActivity : AppCompatActivity() {
     }
 
     private fun saveNote() {
-        val title: String = binding.editTextTitle.text.toString()
-        val description: String = binding.editTextDescription.text.toString()
+        val title: String = binding.textInputTitle.editText!!.text.toString()
+        val description: String = binding.textInputDescription.editText!!.text.toString()
 
         if (title.trim().isEmpty() || description.trim().isEmpty()) {
             Toast.makeText(this, getString(R.string.insert_title_and_description), Toast.LENGTH_LONG).show()

@@ -41,11 +41,11 @@ class StudentActivitiesAdapter(
 
                 when (this.activityType) {
                     StudentActivity.MISSING_KIT_ACTIVITY_TYPE ->
-                        binding.root.setBackgroundColor(Color.YELLOW)
+                        binding.root.setBackgroundColor(Color.rgb(255, 255, 128))
                     StudentActivity.PLUS_ACTIVITY_TYPE ->
-                        binding.root.setBackgroundColor(Color.GREEN)
+                        binding.root.setBackgroundColor(Color.rgb(128, 255, 128))
                     StudentActivity.MINUS_ACTIVITY_TYPE ->
-                        binding.root.setBackgroundColor(Color.RED)
+                        binding.root.setBackgroundColor(Color.rgb(255, 128, 128))
                 }
 
                 binding.textViewStudentActivityOptions.setOnClickListener {

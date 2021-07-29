@@ -7,37 +7,59 @@
     android:padding="16dp"
     tools:context=".ui.activity.AddEditScheduleActivity">
 
-    <EditText
-        android:id="@+id/edit_text_activity"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_activity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="text"
-        android:hint="@string/hint_name" />
+        android:layout_marginBottom="8dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint="@string/hint_name"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/edit_text_time_start"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/text_input_time_start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginEnd="8dp"
-            android:focusable="false"
-            android:inputType="text"
-            android:hint="@string/hint_time_start" />
+            android:focusable="false">
 
-        <EditText
-            android:id="@+id/edit_text_time_end"
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:focusable="false"
+                android:hint="@string/hint_time_start"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/text_input_time_end"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginStart="8dp"
-            android:focusable="false"
-            android:inputType="text"
-            android:hint="@string/hint_time_end" />
+            android:focusable="false">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:focusable="false"
+                android:hint="@string/hint_time_end"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

@@ -33,9 +33,9 @@ class AddEditStudentActivity : AppCompatActivity() {
 
     private fun prepareForEditingIfNeeded() {
         if (intent.hasExtra(EXTRA_ID)) {
-            binding.editTextFirstName.setText(intent.getStringExtra(EXTRA_FIRST_NAME))
-            binding.editTextLastName.setText(intent.getStringExtra(EXTRA_LAST_NAME))
-            binding.editTextClassName.setText(intent.getStringExtra(EXTRA_CLASS_NAME))
+            binding.textInputFirstName.editText!!.setText(intent.getStringExtra(EXTRA_FIRST_NAME))
+            binding.textInputLastName.editText!!.setText(intent.getStringExtra(EXTRA_LAST_NAME))
+            binding.textInputClassName.editText!!.setText(intent.getStringExtra(EXTRA_CLASS_NAME))
         }
     }
 
@@ -50,9 +50,9 @@ class AddEditStudentActivity : AppCompatActivity() {
     }
 
     private fun saveStudent() {
-        val firstName: String = binding.editTextFirstName.text.toString()
-        val lastName: String = binding.editTextLastName.text.toString()
-        val className: String = binding.editTextClassName.text.toString()
+        val firstName: String = binding.textInputFirstName.editText!!.text.toString()
+        val lastName: String = binding.textInputLastName.editText!!.text.toString()
+        val className: String = binding.textInputClassName.editText!!.text.toString()
         val groupId: Int = intent.getIntExtra(EXTRA_GROUP_ID, -1)
 
         if (firstName.trim().isEmpty() || lastName.isEmpty() || className.isEmpty()) {

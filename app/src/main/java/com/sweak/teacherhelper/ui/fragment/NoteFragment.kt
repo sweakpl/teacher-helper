@@ -112,7 +112,7 @@ class NoteFragment : Fragment() {
     private fun showOptionsMenu(position: Int) {
         val popupMenu = PopupMenu(requireContext(),
             binding.recyclerViewNotes[position].findViewById(R.id.text_view_student_activity_options))
-        popupMenu.inflate(R.menu.edit_delete_options_menu)
+        popupMenu.inflate(R.menu.edit_delete_menu)
 
         popupMenu.setOnMenuItemClickListener(object : PopupMenu.OnMenuItemClickListener {
             override fun onMenuItemClick(item: MenuItem?): Boolean {
@@ -148,6 +148,9 @@ class NoteFragment : Fragment() {
     private fun setViewModelDataObserver() {
         noteViewModel.allNotes.observe(viewLifecycleOwner, { notes ->
             noteAdapter.setNotes(notes)
+
+            binding.textViewEmptyIndicator.visibility =
+                if (notes.isEmpty()) View.VISIBLE else View.GONE
         })
     }
 

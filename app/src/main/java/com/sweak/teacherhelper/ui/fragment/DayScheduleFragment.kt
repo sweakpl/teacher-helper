@@ -116,7 +116,7 @@ class DayScheduleFragment : Fragment() {
     private fun showOptionsMenu(position: Int) {
         val popupMenu = PopupMenu(requireContext(),
             binding.recyclerViewSchedule[position].findViewById(R.id.text_view_schedule_options))
-        popupMenu.inflate(R.menu.edit_delete_options_menu)
+        popupMenu.inflate(R.menu.edit_delete_menu)
 
         popupMenu.setOnMenuItemClickListener(object : PopupMenu.OnMenuItemClickListener {
             override fun onMenuItemClick(item: MenuItem?): Boolean {
@@ -153,6 +153,9 @@ class DayScheduleFragment : Fragment() {
     private fun setViewModelDataObserver() {
         scheduleViewModel.allSchedule.observe(viewLifecycleOwner, { schedule ->
             scheduleAdapter.setSchedule(schedule)
+
+            binding.textViewEmptyIndicator.visibility =
+                if (schedule.isEmpty()) View.VISIBLE else View.GONE
         })
     }
 

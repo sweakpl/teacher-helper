@@ -9,13 +9,13 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.sweak.teacherhelper.R
-import com.sweak.teacherhelper.databinding.FragmentScheduleBinding
+import com.sweak.teacherhelper.databinding.FragmentWeekScheduleBinding
 import com.sweak.teacherhelper.ui.adapter.viewpager.SchedulePagerAdapter
 import java.util.*
 
 class WeekScheduleFragment : Fragment() {
 
-    private var _binding: FragmentScheduleBinding? = null
+    private var _binding: FragmentWeekScheduleBinding? = null
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
 
@@ -23,7 +23,7 @@ class WeekScheduleFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding =  FragmentScheduleBinding.inflate(inflater, container, false)
+        _binding =  FragmentWeekScheduleBinding.inflate(inflater, container, false)
         val root = binding.root
 
         prepareViewPager(savedInstanceState)

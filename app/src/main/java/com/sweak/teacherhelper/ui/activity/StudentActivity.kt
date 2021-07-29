@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -127,7 +128,7 @@ class StudentActivity : AppCompatActivity() {
     private fun showOptionsMenu(position: Int) {
         val popupMenu = PopupMenu(this,
             binding.recyclerViewStudents[position].findViewById(R.id.text_view_student_options))
-        popupMenu.inflate(R.menu.edit_delete_options_menu)
+        popupMenu.inflate(R.menu.edit_delete_menu)
 
         popupMenu.setOnMenuItemClickListener(object : PopupMenu.OnMenuItemClickListener {
             override fun onMenuItemClick(item: MenuItem?): Boolean {
@@ -174,6 +175,9 @@ class StudentActivity : AppCompatActivity() {
     private fun setViewModelDataObserver() {
         studentViewModel.allStudents.observe(this, { students ->
             studentAdapter.setStudents(students)
+
+            binding.textViewEmptyIndicator.visibility =
+                if (students.isEmpty()) View.VISIBLE else View.GONE
         })
     }
 
@@ -183,7 +187,15 @@ class StudentActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when(item.itemId) {
-        R.id.start_control -> { startControlSession(); true }
+        R.id.start_control -> {
+            if (studentViewModel.allStudents.value!!.isNotEmpty())
+                startControlSession()
+            else
+                Toast.makeText(this,
+                    getString(R.string.cant_start_control), Toast.LENGTH_SHORT)
+                    .show()
+            true
+        }
         else -> super.onOptionsItemSelected(item)
     }
 

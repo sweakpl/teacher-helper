@@ -38,33 +38,33 @@ class AddEditScheduleActivity : AppCompatActivity() {
 
     private fun prepareForEditingIfNeeded() {
         if (intent.hasExtra(EXTRA_ID)) {
-            binding.editTextActivity.setText(intent.getStringExtra(EXTRA_ACTIVITY))
-            binding.editTextTimeStart.setText(intent.getStringExtra(EXTRA_TIME_START))
-            binding.editTextTimeEnd.setText(intent.getStringExtra(EXTRA_TIME_END))
+            binding.textInputActivity.editText!!.setText(intent.getStringExtra(EXTRA_ACTIVITY))
+            binding.textInputTimeStart.editText!!.setText(intent.getStringExtra(EXTRA_TIME_START))
+            binding.textInputTimeEnd.editText!!.setText(intent.getStringExtra(EXTRA_TIME_END))
         }
     }
 
     private fun prepareTimePickers() {
-        binding.editTextTimeStart.inputType = InputType.TYPE_NULL
-        binding.editTextTimeEnd.inputType = InputType.TYPE_NULL
+        binding.textInputTimeStart.editText!!.inputType = InputType.TYPE_NULL
+        binding.textInputTimeEnd.editText!!.inputType = InputType.TYPE_NULL
 
         val calendar = Calendar.getInstance()
 
         val pickerTimeStart: TimePickerDialog = object : TimePickerDialog(this,
             OnTimeSetListener { _, hourOfDay, minute ->
-                binding.editTextTimeStart.setText(getTimeString(hourOfDay, minute)) },
+                binding.textInputTimeStart.editText!!.setText(getTimeString(hourOfDay, minute)) },
             calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true) {}
 
-        binding.editTextTimeStart.setOnClickListener {
+        binding.textInputTimeStart.editText!!.setOnClickListener {
             pickerTimeStart.show()
         }
 
         val pickerTimeEnd: TimePickerDialog = object : TimePickerDialog(this,
             OnTimeSetListener { _, hourOfDay, minute ->
-                binding.editTextTimeEnd.setText(getTimeString(hourOfDay, minute)) },
+                binding.textInputTimeEnd.editText!!.setText(getTimeString(hourOfDay, minute)) },
             calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true) {}
 
-        binding.editTextTimeEnd.setOnClickListener {
+        binding.textInputTimeEnd.editText!!.setOnClickListener {
             pickerTimeEnd.show()
         }
     }
@@ -83,9 +83,9 @@ class AddEditScheduleActivity : AppCompatActivity() {
     }
 
     private fun saveActivity() {
-        val activity: String = binding.editTextActivity.text.toString()
-        val timeStart: String = binding.editTextTimeStart.text.toString()
-        val timeEnd: String = binding.editTextTimeEnd.text.toString()
+        val activity: String = binding.textInputActivity.editText!!.text.toString()
+        val timeStart: String = binding.textInputTimeStart.editText!!.text.toString()
+        val timeEnd: String = binding.textInputTimeEnd.editText!!.text.toString()
 
         if (activity.trim().isEmpty() || timeStart.isEmpty() || timeEnd.isEmpty()) {
             Toast.makeText(this, getString(R.string.insert_activity_and_time), Toast.LENGTH_LONG).show()

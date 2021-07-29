@@ -11,4 +11,12 @@
         android:layout_height="match_parent"
         tools:listitem="@layout/student_activity_item" />
 
+    <TextView
+        android:id="@+id/text_view_empty_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:text="@string/empty_page"/>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

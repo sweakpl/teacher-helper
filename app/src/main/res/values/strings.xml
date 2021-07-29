@@ -64,6 +64,8 @@
     <string name="missing_kit_count">Missing kit count: %1$d</string>
     <string name="full_name_template" translatable="false">%1$s %2$s</string>
     <string name="schedule_time_template" translatable="false">%1$s - %2$s</string>
+    <string name="empty_page">There\'s nothing here yet</string>
+    <string name="cant_start_control">No students to start the control session</string>
 
     <string-array name="activity_grades">
         <item> </item>

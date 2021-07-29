@@ -34,7 +34,7 @@ class AddEditGroupActivity : AppCompatActivity() {
 
     private fun prepareForEditingIfNeeded() {
         if (intent.hasExtra(EXTRA_ID)) {
-            binding.editTextName.setText(intent.getStringExtra(EXTRA_NAME))
+            binding.textInputName.editText!!.setText(intent.getStringExtra(EXTRA_NAME))
         }
     }
 
@@ -49,7 +49,7 @@ class AddEditGroupActivity : AppCompatActivity() {
     }
 
     private fun saveGroup() {
-        val name: String = binding.editTextName.text.toString()
+        val name: String = binding.textInputName.editText!!.text.toString()
 
         if (name.trim().isEmpty()) {
             Toast.makeText(this, getString(R.string.insert_name), Toast.LENGTH_LONG).show()

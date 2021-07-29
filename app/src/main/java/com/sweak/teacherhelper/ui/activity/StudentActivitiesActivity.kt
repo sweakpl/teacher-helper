@@ -3,6 +3,7 @@ package com.sweak.teacherhelper.ui.activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.view.get
 import androidx.lifecycle.ViewModelProvider
@@ -78,6 +79,9 @@ class StudentActivitiesActivity : AppCompatActivity() {
     private fun setViewModelDataObserver() {
         studentActivitiesViewModel.allStudentActivities.observe(this, { students ->
             studentActivitiesAdapter.setStudentActivities(students)
+
+            binding.textViewEmptyIndicator.visibility =
+                if (students.isEmpty()) View.VISIBLE else View.GONE
         })
     }
 }
