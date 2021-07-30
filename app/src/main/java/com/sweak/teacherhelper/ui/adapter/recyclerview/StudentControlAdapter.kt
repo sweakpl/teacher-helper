@@ -1,5 +1,6 @@
 package com.sweak.teacherhelper.ui.adapter.recyclerview
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -40,7 +41,7 @@ class StudentControlAdapter(
 
     override fun onBindViewHolder(holder: StudentControlHolder, position: Int) {
         with (holder) {
-            with(students[position]) {
+            with(students[holder.absoluteAdapterPosition]) {
                 binding.textViewStudentFullName.text =
                     context.getString(R.string.full_name_template, this.firstName, this.lastName)
                 binding.textViewMissingKitCount.text =
@@ -48,14 +49,15 @@ class StudentControlAdapter(
                 prepareActivitySpinner(binding)
 
                 binding.checkboxMissingKit.setOnCheckedChangeListener {_, isChecked ->
-                    checkboxCheckedListener.onChecked(isChecked, position)
+                    checkboxCheckedListener.onChecked(isChecked, holder.absoluteAdapterPosition)
                 }
 
                 binding.spinnerActivity.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                     override fun onItemSelected(
                         parent: AdapterView<*>?, view: View?, adapterViewPosition: Int, id: Long)
                     {
-                        spinnerItemSelectedListener.onSelected(parent, adapterViewPosition, position)
+                        spinnerItemSelectedListener.onSelected(
+                            parent, adapterViewPosition, holder.absoluteAdapterPosition)
                     }
                     override fun onNothingSelected(parent: AdapterView<*>?) {}
                 }
@@ -84,6 +86,7 @@ class StudentControlAdapter(
 
     override fun getItemCount(): Int = students.size
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setStudents(students: List<Student>) {
         this.students = students
         notifyDataSetChanged()
@@ -91,6 +94,7 @@ class StudentControlAdapter(
 
     fun getStudentAt(position: Int): Student = students[position]
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setMissingKits(missingKits: List<MissingKitTuple>) {
         this.missingKits = missingKits
         notifyDataSetChanged()

@@ -147,7 +147,7 @@ class NoteFragment : Fragment() {
 
     private fun setViewModelDataObserver() {
         noteViewModel.allNotes.observe(viewLifecycleOwner, { notes ->
-            noteAdapter.setNotes(notes)
+            noteAdapter.submitList(notes)
 
             binding.textViewEmptyIndicator.visibility =
                 if (notes.isEmpty()) View.VISIBLE else View.GONE

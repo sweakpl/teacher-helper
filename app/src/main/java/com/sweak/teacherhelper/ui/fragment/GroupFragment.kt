@@ -165,7 +165,7 @@ class GroupFragment : Fragment() {
 
     private fun setViewModelDataObserver() {
         groupViewModel.allGroups.observe(viewLifecycleOwner, { groups ->
-            groupAdapter.setGroups(groups)
+            groupAdapter.submitList(groups)
 
             binding.textViewEmptyIndicator.visibility =
                 if (groups.isEmpty()) View.VISIBLE else View.GONE

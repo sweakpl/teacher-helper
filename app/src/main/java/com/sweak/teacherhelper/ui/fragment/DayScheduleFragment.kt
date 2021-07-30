@@ -152,7 +152,7 @@ class DayScheduleFragment : Fragment() {
 
     private fun setViewModelDataObserver() {
         scheduleViewModel.allSchedule.observe(viewLifecycleOwner, { schedule ->
-            scheduleAdapter.setSchedule(schedule)
+            scheduleAdapter.submitList(schedule)
 
             binding.textViewEmptyIndicator.visibility =
                 if (schedule.isEmpty()) View.VISIBLE else View.GONE

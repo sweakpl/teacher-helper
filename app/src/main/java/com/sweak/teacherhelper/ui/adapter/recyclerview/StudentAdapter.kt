@@ -3,6 +3,8 @@ package com.sweak.teacherhelper.ui.adapter.recyclerview
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.sweak.teacherhelper.R
 import com.sweak.teacherhelper.database.entity.Student
@@ -12,9 +14,7 @@ class StudentAdapter(
     private val context: Context,
     private var itemClickListener: ItemClickListener,
     private var optionsMenuClickListener: OptionsMenuClickListener
-) : RecyclerView.Adapter<StudentAdapter.StudentHolder>()  {
-
-    private var students: List<Student> = ArrayList()
+) : ListAdapter<Student, StudentAdapter.StudentHolder>(DIFF_CALLBACK)  {
 
     class StudentHolder(val binding: StudentItemBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -34,28 +34,36 @@ class StudentAdapter(
 
     override fun onBindViewHolder(holder: StudentHolder, position: Int) {
         with (holder) {
-            with (students[position]) {
+            with (getItem(holder.absoluteAdapterPosition)) {
                 binding.textViewStudentFullName.text =
                     context.getString(R.string.full_name_template, this.firstName, this.lastName)
                 binding.textViewStudentDetails.text = this.className
 
                 binding.textViewStudentOptions.setOnClickListener {
-                    optionsMenuClickListener.onOptionsMenuClicked(position)
+                    optionsMenuClickListener.onOptionsMenuClicked(holder.absoluteAdapterPosition)
                 }
 
                 binding.root.setOnClickListener {
-                    itemClickListener.onItemClickListener(position)
+                    itemClickListener.onItemClickListener(holder.absoluteAdapterPosition)
                 }
             }
         }
     }
 
-    override fun getItemCount(): Int = students.size
+    fun getStudentAt(position: Int): Student = getItem(position)
 
-    fun setStudents(students: List<Student>) {
-        this.students = students
-        notifyDataSetChanged()
+    companion object {
+        private val DIFF_CALLBACK: DiffUtil.ItemCallback<Student> =
+            object : DiffUtil.ItemCallback<Student>() {
+                override fun areItemsTheSame(oldItem: Student, newItem: Student): Boolean {
+                    return oldItem.id == newItem.id
+                }
+                override fun areContentsTheSame(oldItem: Student, newItem: Student): Boolean {
+                    return (oldItem.firstName == newItem.firstName) and
+                            (oldItem.lastName == newItem.lastName) and
+                            (oldItem.className == newItem.className) and
+                            (oldItem.groupId == newItem.groupId)
+                }
+            }
     }
-
-    fun getStudentAt(position: Int): Student = students[position]
 }

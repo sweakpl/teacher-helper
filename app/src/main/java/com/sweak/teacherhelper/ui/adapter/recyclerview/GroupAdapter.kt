@@ -2,6 +2,8 @@ package com.sweak.teacherhelper.ui.adapter.recyclerview
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.sweak.teacherhelper.database.entity.Group
 import com.sweak.teacherhelper.databinding.GroupItemBinding
@@ -9,9 +11,7 @@ import com.sweak.teacherhelper.databinding.GroupItemBinding
 class GroupAdapter(
     private var optionsMenuClickListener: OptionsMenuClickListener,
     private var itemClickListener: ItemClickListener
-) : RecyclerView.Adapter<GroupAdapter.GroupHolder>() {
-
-    private var groups: List<Group> = ArrayList()
+) : ListAdapter<Group, GroupAdapter.GroupHolder>(DIFF_CALLBACK) {
 
     class GroupHolder(val binding: GroupItemBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -31,26 +31,31 @@ class GroupAdapter(
 
     override fun onBindViewHolder(holder: GroupHolder, position: Int) {
         with (holder) {
-            with (groups[position]) {
+            with (getItem(holder.absoluteAdapterPosition)) {
                 binding.textViewGroupName.text = this.name
 
                 binding.textViewGroupOptions.setOnClickListener {
-                    optionsMenuClickListener.onOptionsMenuClicked(position)
+                    optionsMenuClickListener.onOptionsMenuClicked(holder.absoluteAdapterPosition)
                 }
 
                 binding.root.setOnClickListener {
-                    itemClickListener.onItemClickListener(position)
+                    itemClickListener.onItemClickListener(holder.absoluteAdapterPosition)
                 }
             }
         }
     }
 
-    override fun getItemCount(): Int = groups.size
+    fun getGroupAt(position: Int): Group = getItem(position)
 
-    fun setGroups(groups: List<Group>) {
-        this.groups = groups
-        notifyDataSetChanged()
+    companion object {
+        private val DIFF_CALLBACK: DiffUtil.ItemCallback<Group> =
+            object : DiffUtil.ItemCallback<Group>() {
+                override fun areItemsTheSame(oldItem: Group, newItem: Group): Boolean {
+                    return oldItem.id == newItem.id
+                }
+                override fun areContentsTheSame(oldItem: Group, newItem: Group): Boolean {
+                    return oldItem.name == newItem.name
+                }
+            }
     }
-
-    fun getGroupAt(position: Int): Group = groups[position]
 }

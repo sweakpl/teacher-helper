@@ -2,6 +2,8 @@ package com.sweak.teacherhelper.ui.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.AdapterView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
@@ -36,7 +38,6 @@ class StudentControlActivity : AppCompatActivity() {
 
         prepareActionBar()
         prepareStudentControlRecyclerView()
-        prepareSaveButton()
         setViewModelDataObserver()
     }
 
@@ -71,16 +72,6 @@ class StudentControlActivity : AppCompatActivity() {
         binding.recyclerViewStudentControl.adapter = studentControlAdapter
     }
 
-    private fun prepareSaveButton() {
-        binding.buttonSaveActivities.setOnClickListener {
-            if (studentControlActivityBuffer.flush())
-                Toast.makeText(this, getString(R.string.activities_saved), Toast.LENGTH_SHORT)
-                    .show()
-
-            finish()
-        }
-    }
-
     private fun setViewModelDataObserver() {
         studentControlViewModel.allStudents.observe(this, { students ->
             studentControlAdapter.setStudents(students)
@@ -90,11 +81,27 @@ class StudentControlActivity : AppCompatActivity() {
         })
     }
 
-    override fun onPause() {
-        if (isFinishing and !studentControlActivityBuffer.containsData())
-            Toast.makeText(this, getString(R.string.activities_not_saved), Toast.LENGTH_SHORT)
-                .show()
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.save_menu, menu)
+        return true
+    }
 
-        super.onPause()
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when(item.itemId) {
+        R.id.save -> {
+            saveActivitiesIfPossibleAndFinish()
+            true
+        }
+        else -> super.onOptionsItemSelected(item)
+    }
+
+    private fun saveActivitiesIfPossibleAndFinish() {
+        if (studentControlActivityBuffer.flush()) {
+            Toast.makeText(this, getString(R.string.activities_saved), Toast.LENGTH_SHORT)
+                .show()
+            finish()
+        }
+        else
+            Toast.makeText(this, getString(R.string.nothing_to_save), Toast.LENGTH_SHORT)
+                .show()
     }
 }

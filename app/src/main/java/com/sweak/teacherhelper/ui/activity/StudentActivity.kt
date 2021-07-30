@@ -174,7 +174,7 @@ class StudentActivity : AppCompatActivity() {
 
     private fun setViewModelDataObserver() {
         studentViewModel.allStudents.observe(this, { students ->
-            studentAdapter.setStudents(students)
+            studentAdapter.submitList(students)
 
             binding.textViewEmptyIndicator.visibility =
                 if (students.isEmpty()) View.VISIBLE else View.GONE

@@ -58,9 +58,9 @@
     <string name="missing_kit">Brak stroju</string>
     <string name="activity">Aktywność</string>
     <string name="activities_saved">Aktywności zapisane</string>
-    <string name="activities_not_saved">Aktywności nie zapisane</string>
     <string name="all_data_will_be_lost">Wszystkie pozwiązane informacje zostaną utracone</string>
     <string name="missing_kit_count">Ilość braków stroju: %1$d</string>
     <string name="empty_page">Nic tu jeszcze nie ma</string>
     <string name="cant_start_control">Brak uczniów, by rozpocząć sesję kontroli</string>
+    <string name="nothing_to_save">Nic do zapisania</string>
 </resources>

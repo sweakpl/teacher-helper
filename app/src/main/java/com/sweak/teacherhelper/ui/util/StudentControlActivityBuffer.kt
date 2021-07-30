@@ -30,7 +30,6 @@ class StudentControlActivityBuffer(context: Context) {
     }
 
     fun flush(): Boolean {
-
         if (!containsData())
             return false
 
@@ -44,7 +43,8 @@ class StudentControlActivityBuffer(context: Context) {
             for (studentActivity in studentActivityMap) {
                 studentActivityDao.insertAll(
                     StudentActivity(
-                        activityType = if (studentActivity.value == "-")
+                        activityType =
+                        if (studentActivity.value == StudentActivity.MINUS_ACTIVITY_TYPE)
                             StudentActivity.MINUS_ACTIVITY_TYPE
                         else
                             StudentActivity.PLUS_ACTIVITY_TYPE,
@@ -55,5 +55,5 @@ class StudentControlActivityBuffer(context: Context) {
         return true
     }
 
-    fun containsData() = studentActivityMap.isNotEmpty() or studentMissingKitSet.isNotEmpty()
+    private fun containsData() = studentActivityMap.isNotEmpty() or studentMissingKitSet.isNotEmpty()
 }

@@ -2,15 +2,15 @@ package com.sweak.teacherhelper.ui.adapter.recyclerview
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.sweak.teacherhelper.database.entity.Note
 import com.sweak.teacherhelper.databinding.NoteItemBinding
 
 class NoteAdapter(
     private var optionsMenuClickListener: OptionsMenuClickListener
-) : RecyclerView.Adapter<NoteAdapter.NoteHolder>() {
-
-    private var notes: List<Note> = ArrayList()
+) : ListAdapter<Note, NoteAdapter.NoteHolder>(DIFF_CALLBACK) {
 
     inner class NoteHolder(val binding: NoteItemBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -26,23 +26,29 @@ class NoteAdapter(
 
     override fun onBindViewHolder(holder: NoteHolder, position: Int) {
         with (holder) {
-            with (notes[position]) {
+            with (getItem(holder.absoluteAdapterPosition)) {
                 binding.textViewNoteTitle.text = this.title
                 binding.textViewNoteDescription.text = this.description
 
                 binding.textViewStudentActivityOptions.setOnClickListener {
-                    optionsMenuClickListener.onOptionsMenuClicked(position)
+                    optionsMenuClickListener.onOptionsMenuClicked(holder.absoluteAdapterPosition)
                 }
             }
         }
     }
 
-    override fun getItemCount(): Int = notes.size
+    fun getNoteAt(position: Int): Note = getItem(position)
 
-    fun setNotes(notes: List<Note>) {
-        this.notes = notes
-        notifyDataSetChanged()
+    companion object {
+        private val DIFF_CALLBACK: DiffUtil.ItemCallback<Note> =
+            object : DiffUtil.ItemCallback<Note>() {
+                override fun areItemsTheSame(oldItem: Note, newItem: Note): Boolean {
+                    return oldItem.id == newItem.id
+                }
+                override fun areContentsTheSame(oldItem: Note, newItem: Note): Boolean {
+                    return (oldItem.title == newItem.title) and
+                            (oldItem.description == newItem.description)
+                }
+            }
     }
-
-    fun getNoteAt(position: Int): Note = notes[position]
 }
