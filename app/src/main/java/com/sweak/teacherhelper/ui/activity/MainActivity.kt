@@ -1,5 +1,6 @@
 package com.sweak.teacherhelper.ui.activity
 
+import android.os.Build
 import android.os.Bundle
 import com.google.android.material.tabs.TabLayout
 import androidx.appcompat.app.AppCompatActivity
@@ -34,6 +35,22 @@ class MainActivity : AppCompatActivity() {
         TabLayoutMediator(tabs, viewPager) { tab, position ->
             tab.text = getTabTitle(position)
         }.attach()
+
+        setTabLayoutColors()
+    }
+
+    private fun setTabLayoutColors() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            binding.tabLayout.setSelectedTabIndicatorColor(resources.getColor(R.color.white, null))
+            binding.tabLayout.setTabTextColors(
+                resources.getColor(R.color.white, null),
+                resources.getColor(R.color.white, null))
+        }
+        else {
+            binding.tabLayout.setSelectedTabIndicatorColor(resources.getColor(R.color.white))
+            binding.tabLayout.setTabTextColors(
+                resources.getColor(R.color.white), resources.getColor(R.color.white))
+        }
     }
 
     private fun getTabTitle(position: Int): CharSequence {

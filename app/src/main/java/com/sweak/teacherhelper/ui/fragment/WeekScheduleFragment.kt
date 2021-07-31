@@ -1,5 +1,6 @@
 package com.sweak.teacherhelper.ui.fragment
 
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -43,6 +44,23 @@ class WeekScheduleFragment : Fragment() {
         TabLayoutMediator(tabs, viewPager) { tab, position ->
             tab.text = getTabTitle(position)
         }.attach()
+
+        setTabLayoutColors()
+    }
+
+    private fun setTabLayoutColors() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            binding.tabLayout.setSelectedTabIndicatorColor(resources.getColor(R.color.white, null))
+            binding.tabLayout.setTabTextColors(
+                resources.getColor(R.color.white, null),
+                resources.getColor(R.color.white, null)
+            )
+        }
+        else {
+            binding.tabLayout.setSelectedTabIndicatorColor(resources.getColor(R.color.white))
+            binding.tabLayout.setTabTextColors(
+                resources.getColor(R.color.white), resources.getColor(R.color.white))
+        }
     }
 
     private fun getCurrentDayIndex(): Int =
