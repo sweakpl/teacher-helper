@@ -16,6 +16,6 @@ interface ScheduleDao {
     @Update
     fun updateSchedule(vararg schedule: Schedule)
 
-    @Query("SELECT * FROM schedule WHERE day = :day ORDER BY time_start, time_end")
+    @Query("SELECT * FROM schedule WHERE day = :day ORDER BY time(time_start), time(time_end)")
     fun getAll(day: String): LiveData<List<Schedule>>
 }

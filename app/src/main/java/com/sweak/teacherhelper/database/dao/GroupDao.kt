@@ -16,6 +16,6 @@ interface GroupDao {
     @Update
     fun updateGroup(vararg group: Group)
 
-    @Query("SELECT * FROM groups")
+    @Query("SELECT * FROM groups ORDER BY name ASC")
     fun getAll(): LiveData<List<Group>>
 }
