@@ -7,12 +7,13 @@
         android:icon="@mipmap/teacher_helper_icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TeacherNotebook">
+        android:theme="@style/Theme.TeacherNotebook" >
         <activity
             android:name=".ui.activity.MainActivity"
             android:label="@string/app_name"
             android:launchMode="singleTop"
-            android:theme="@style/Theme.TeacherNotebook.NoActionBar">
+            android:theme="@style/Theme.TeacherNotebook.NoActionBar"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

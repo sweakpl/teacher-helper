@@ -1,4 +1,4 @@
-package com.sweak.teacherhelper.ui.util
+package com.sweak.teacherhelper.viewmodel.util
 
 import android.content.Context
 import com.sweak.teacherhelper.database.HelperDatabase

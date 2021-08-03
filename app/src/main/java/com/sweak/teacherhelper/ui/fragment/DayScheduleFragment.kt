@@ -19,9 +19,9 @@ import com.sweak.teacherhelper.R
 import com.sweak.teacherhelper.ui.activity.AddEditScheduleActivity
 import com.sweak.teacherhelper.database.entity.Schedule
 import com.sweak.teacherhelper.databinding.FragmentDayScheduleBinding
-import com.sweak.teacherhelper.ui.adapter.recyclerview.ScheduleAdapter
-import com.sweak.teacherhelper.ui.viewmodel.ScheduleViewModel
-import com.sweak.teacherhelper.ui.viewmodel.ScheduleViewModelFactory
+import com.sweak.teacherhelper.adapter.recyclerview.ScheduleAdapter
+import com.sweak.teacherhelper.viewmodel.viewmodel.ScheduleViewModel
+import com.sweak.teacherhelper.viewmodel.viewmodel.ScheduleViewModelFactory
 
 class DayScheduleFragment : Fragment() {
 

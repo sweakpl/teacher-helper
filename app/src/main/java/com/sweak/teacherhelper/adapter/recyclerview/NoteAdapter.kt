@@ -1,4 +1,4 @@
-package com.sweak.teacherhelper.ui.adapter.recyclerview
+package com.sweak.teacherhelper.adapter.recyclerview
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

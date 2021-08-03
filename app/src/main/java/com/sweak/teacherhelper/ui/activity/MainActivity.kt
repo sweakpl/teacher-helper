@@ -8,7 +8,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import com.sweak.teacherhelper.R
 import com.sweak.teacherhelper.databinding.ActivityMainBinding
-import com.sweak.teacherhelper.ui.adapter.viewpager.SectionsPagerAdapter
+import com.sweak.teacherhelper.adapter.viewpager.SectionsPagerAdapter
 
 class MainActivity : AppCompatActivity() {
 

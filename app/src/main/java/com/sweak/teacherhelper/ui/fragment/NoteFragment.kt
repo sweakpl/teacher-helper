@@ -19,9 +19,9 @@ import com.sweak.teacherhelper.R
 import com.sweak.teacherhelper.database.entity.Note
 import com.sweak.teacherhelper.databinding.FragmentNoteBinding
 import com.sweak.teacherhelper.ui.activity.AddEditNoteActivity
-import com.sweak.teacherhelper.ui.adapter.recyclerview.NoteAdapter
-import com.sweak.teacherhelper.ui.viewmodel.NoteViewModel
-import com.sweak.teacherhelper.ui.viewmodel.NoteViewModelFactory
+import com.sweak.teacherhelper.adapter.recyclerview.NoteAdapter
+import com.sweak.teacherhelper.viewmodel.viewmodel.NoteViewModel
+import com.sweak.teacherhelper.viewmodel.viewmodel.NoteViewModelFactory
 
 class NoteFragment : Fragment() {
 

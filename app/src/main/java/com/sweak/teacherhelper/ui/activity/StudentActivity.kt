@@ -18,10 +18,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.sweak.teacherhelper.R
 import com.sweak.teacherhelper.database.entity.Student
 import com.sweak.teacherhelper.databinding.ActivityStudentBinding
-import com.sweak.teacherhelper.ui.adapter.recyclerview.StudentAdapter
+import com.sweak.teacherhelper.adapter.recyclerview.StudentAdapter
 import com.sweak.teacherhelper.ui.fragment.GroupFragment
-import com.sweak.teacherhelper.ui.viewmodel.StudentViewModel
-import com.sweak.teacherhelper.ui.viewmodel.StudentViewModelFactory
+import com.sweak.teacherhelper.viewmodel.viewmodel.StudentViewModel
+import com.sweak.teacherhelper.viewmodel.viewmodel.StudentViewModelFactory
 
 class StudentActivity : AppCompatActivity() {
 

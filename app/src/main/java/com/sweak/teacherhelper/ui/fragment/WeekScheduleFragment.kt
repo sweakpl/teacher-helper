@@ -11,7 +11,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.sweak.teacherhelper.R
 import com.sweak.teacherhelper.databinding.FragmentWeekScheduleBinding
-import com.sweak.teacherhelper.ui.adapter.viewpager.SchedulePagerAdapter
+import com.sweak.teacherhelper.adapter.viewpager.SchedulePagerAdapter
 import java.util.*
 
 class WeekScheduleFragment : Fragment() {

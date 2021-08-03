@@ -1,4 +1,4 @@
-package com.sweak.teacherhelper.ui.adapter.viewpager
+package com.sweak.teacherhelper.adapter.viewpager
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

@@ -1,4 +1,4 @@
-package com.sweak.teacherhelper.ui.viewmodel
+package com.sweak.teacherhelper.viewmodel.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

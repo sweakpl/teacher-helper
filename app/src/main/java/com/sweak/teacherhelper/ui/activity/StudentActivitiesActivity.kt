@@ -10,9 +10,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sweak.teacherhelper.R
 import com.sweak.teacherhelper.databinding.ActivityStudentActivitiesBinding
-import com.sweak.teacherhelper.ui.adapter.recyclerview.StudentActivitiesAdapter
-import com.sweak.teacherhelper.ui.viewmodel.StudentActivitiesViewModel
-import com.sweak.teacherhelper.ui.viewmodel.StudentActivitiesViewModelFactory
+import com.sweak.teacherhelper.adapter.recyclerview.StudentActivitiesAdapter
+import com.sweak.teacherhelper.viewmodel.viewmodel.StudentActivitiesViewModel
+import com.sweak.teacherhelper.viewmodel.viewmodel.StudentActivitiesViewModelFactory
 
 class StudentActivitiesActivity : AppCompatActivity() {
 

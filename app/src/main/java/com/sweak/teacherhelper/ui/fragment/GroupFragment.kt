@@ -21,9 +21,9 @@ import com.sweak.teacherhelper.ui.activity.StudentActivity
 import com.sweak.teacherhelper.database.entity.Group
 import com.sweak.teacherhelper.databinding.FragmentGroupBinding
 import com.sweak.teacherhelper.ui.activity.AddEditGroupActivity
-import com.sweak.teacherhelper.ui.adapter.recyclerview.GroupAdapter
-import com.sweak.teacherhelper.ui.viewmodel.GroupViewModel
-import com.sweak.teacherhelper.ui.viewmodel.GroupViewModelFactory
+import com.sweak.teacherhelper.adapter.recyclerview.GroupAdapter
+import com.sweak.teacherhelper.viewmodel.viewmodel.GroupViewModel
+import com.sweak.teacherhelper.viewmodel.viewmodel.GroupViewModelFactory
 
 class GroupFragment : Fragment() {
 
