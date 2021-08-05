@@ -50,10 +50,10 @@ class AddEditNoteActivity : AppCompatActivity() {
     }
 
     private fun saveNote() {
-        val title: String = binding.textInputTitle.editText!!.text.toString()
-        val description: String = binding.textInputDescription.editText!!.text.toString()
+        val title: String = binding.textInputTitle.editText!!.text.toString().trim()
+        val description: String = binding.textInputDescription.editText!!.text.toString().trim()
 
-        if (title.trim().isEmpty() || description.trim().isEmpty()) {
+        if (title.isEmpty() || description.isEmpty()) {
             Toast.makeText(this, getString(R.string.insert_title_and_description), Toast.LENGTH_LONG).show()
             return
         }

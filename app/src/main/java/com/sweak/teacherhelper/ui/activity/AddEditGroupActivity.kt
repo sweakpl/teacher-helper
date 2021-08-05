@@ -49,9 +49,9 @@ class AddEditGroupActivity : AppCompatActivity() {
     }
 
     private fun saveGroup() {
-        val name: String = binding.textInputName.editText!!.text.toString()
+        val name: String = binding.textInputName.editText!!.text.toString().trim()
 
-        if (name.trim().isEmpty()) {
+        if (name.isEmpty()) {
             Toast.makeText(this, getString(R.string.insert_name), Toast.LENGTH_LONG).show()
             return
         }

@@ -70,7 +70,16 @@ class AddEditScheduleActivity : AppCompatActivity() {
     }
 
     private fun getTimeString(hour: Int, minute: Int): String =
-        if (minute < 10) "$hour:0$minute" else "$hour:$minute"
+        if (hour < 10)
+            if (minute < 10)
+                "0$hour:0$minute"
+            else
+                "0$hour:$minute"
+        else
+            if (minute < 10)
+                "$hour:0$minute"
+            else
+                "$hour:$minute"
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.save_menu, menu)
@@ -83,11 +92,11 @@ class AddEditScheduleActivity : AppCompatActivity() {
     }
 
     private fun saveActivity() {
-        val activity: String = binding.textInputActivity.editText!!.text.toString()
+        val activity: String = binding.textInputActivity.editText!!.text.toString().trim()
         val timeStart: String = binding.textInputTimeStart.editText!!.text.toString()
         val timeEnd: String = binding.textInputTimeEnd.editText!!.text.toString()
 
-        if (activity.trim().isEmpty() || timeStart.isEmpty() || timeEnd.isEmpty()) {
+        if (activity.isEmpty() || timeStart.isEmpty() || timeEnd.isEmpty()) {
             Toast.makeText(this, getString(R.string.insert_activity_and_time), Toast.LENGTH_LONG).show()
             return
         }

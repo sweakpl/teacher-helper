@@ -50,12 +50,12 @@ class AddEditStudentActivity : AppCompatActivity() {
     }
 
     private fun saveStudent() {
-        val firstName: String = binding.textInputFirstName.editText!!.text.toString()
-        val lastName: String = binding.textInputLastName.editText!!.text.toString()
-        val className: String = binding.textInputClassName.editText!!.text.toString()
+        val firstName: String = binding.textInputFirstName.editText!!.text.toString().trim()
+        val lastName: String = binding.textInputLastName.editText!!.text.toString().trim()
+        val className: String = binding.textInputClassName.editText!!.text.toString().trim()
         val groupId: Int = intent.getIntExtra(EXTRA_GROUP_ID, -1)
 
-        if (firstName.trim().isEmpty() || lastName.isEmpty() || className.isEmpty()) {
+        if (firstName.isEmpty() || lastName.isEmpty() || className.isEmpty()) {
             Toast.makeText(this, getString(R.string.insert_full_name_and_class), Toast.LENGTH_LONG).show()
             return
         }
