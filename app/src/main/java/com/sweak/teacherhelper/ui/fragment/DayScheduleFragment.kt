@@ -3,23 +3,23 @@ package com.sweak.teacherhelper.ui.fragment
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.PopupMenu
-import androidx.core.view.get
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sweak.teacherhelper.R
-import com.sweak.teacherhelper.ui.activity.AddEditScheduleActivity
+import com.sweak.teacherhelper.adapter.recyclerview.ScheduleAdapter
 import com.sweak.teacherhelper.database.entity.Schedule
 import com.sweak.teacherhelper.databinding.FragmentDayScheduleBinding
-import com.sweak.teacherhelper.adapter.recyclerview.ScheduleAdapter
+import com.sweak.teacherhelper.ui.activity.AddEditScheduleActivity
 import com.sweak.teacherhelper.viewmodel.viewmodel.ScheduleViewModel
 import com.sweak.teacherhelper.viewmodel.viewmodel.ScheduleViewModelFactory
 
@@ -114,33 +114,48 @@ class DayScheduleFragment : Fragment() {
     }
 
     private fun showOptionsMenu(position: Int) {
-        val popupMenu = PopupMenu(requireContext(),
-            binding.recyclerViewSchedule[position].findViewById(R.id.text_view_schedule_options))
-        popupMenu.inflate(R.menu.edit_delete_menu)
+        val menuButtonView = binding.recyclerViewSchedule.findViewHolderForLayoutPosition(position)
+            ?.itemView?.findViewById<TextView>(R.id.text_view_schedule_options)
 
-        popupMenu.setOnMenuItemClickListener(object : PopupMenu.OnMenuItemClickListener {
-            override fun onMenuItemClick(item: MenuItem?): Boolean {
-                when (item?.itemId) {
-                    R.id.delete -> {
-                        scheduleViewModel.delete(scheduleAdapter.getScheduleAt(position))
-                        return true
+        if (menuButtonView == null)
+            return
+        else {
+            val popupMenu = PopupMenu(requireContext(), menuButtonView)
+            popupMenu.inflate(R.menu.edit_delete_menu)
+
+            popupMenu.setOnMenuItemClickListener(object : PopupMenu.OnMenuItemClickListener {
+                override fun onMenuItemClick(item: MenuItem?): Boolean {
+                    when (item?.itemId) {
+                        R.id.delete -> {
+                            scheduleViewModel.delete(scheduleAdapter.getScheduleAt(position))
+                            return true
+                        }
+                        R.id.edit -> {
+                            val schedule: Schedule = scheduleAdapter.getScheduleAt(position)
+                            val intent = Intent(context, AddEditScheduleActivity::class.java)
+                            intent.putExtra(AddEditScheduleActivity.EXTRA_ID, schedule.id)
+                            intent.putExtra(
+                                AddEditScheduleActivity.EXTRA_ACTIVITY,
+                                schedule.activity
+                            )
+                            intent.putExtra(
+                                AddEditScheduleActivity.EXTRA_TIME_START,
+                                schedule.timeStart
+                            )
+                            intent.putExtra(
+                                AddEditScheduleActivity.EXTRA_TIME_END,
+                                schedule.timeEnd
+                            )
+                            getEditedSchedule.launch(intent)
+                            return true
+                        }
                     }
-                    R.id.edit -> {
-                        val schedule: Schedule = scheduleAdapter.getScheduleAt(position)
-                        val intent = Intent(context, AddEditScheduleActivity::class.java)
-                        intent.putExtra(AddEditScheduleActivity.EXTRA_ID, schedule.id)
-                        intent.putExtra(AddEditScheduleActivity.EXTRA_ACTIVITY, schedule.activity)
-                        intent.putExtra(AddEditScheduleActivity.EXTRA_TIME_START, schedule.timeStart)
-                        intent.putExtra(AddEditScheduleActivity.EXTRA_TIME_END, schedule.timeEnd)
-                        getEditedSchedule.launch(intent)
-                        return true
-                    }
+                    return false
                 }
-                return false
-            }
-        })
+            })
 
-        popupMenu.show()
+            popupMenu.show()
+        }
     }
 
     private fun prepareAddEditScheduleButton() {

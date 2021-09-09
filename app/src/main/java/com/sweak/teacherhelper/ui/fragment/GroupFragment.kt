@@ -3,25 +3,25 @@ package com.sweak.teacherhelper.ui.fragment
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.PopupMenu
-import androidx.core.view.get
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sweak.teacherhelper.R
-import com.sweak.teacherhelper.ui.activity.StudentActivity
+import com.sweak.teacherhelper.adapter.recyclerview.GroupAdapter
 import com.sweak.teacherhelper.database.entity.Group
 import com.sweak.teacherhelper.databinding.FragmentGroupBinding
 import com.sweak.teacherhelper.ui.activity.AddEditGroupActivity
-import com.sweak.teacherhelper.adapter.recyclerview.GroupAdapter
+import com.sweak.teacherhelper.ui.activity.StudentActivity
 import com.sweak.teacherhelper.viewmodel.viewmodel.GroupViewModel
 import com.sweak.teacherhelper.viewmodel.viewmodel.GroupViewModelFactory
 
@@ -123,37 +123,43 @@ class GroupFragment : Fragment() {
     }
 
     private fun showOptionsMenu(position: Int) {
-        val popupMenu = PopupMenu(requireContext(),
-            binding.recyclerViewGroups[position].findViewById(R.id.text_view_group_options))
-        popupMenu.inflate(R.menu.edit_delete_menu)
+        val menuButtonView = binding.recyclerViewGroups.findViewHolderForLayoutPosition(position)
+            ?.itemView?.findViewById<TextView>(R.id.text_view_group_options)
 
-        popupMenu.setOnMenuItemClickListener(object : PopupMenu.OnMenuItemClickListener {
-            override fun onMenuItemClick(item: MenuItem?): Boolean {
-                when (item?.itemId) {
-                    R.id.delete -> {
-                        AlertDialog.Builder(this@GroupFragment.requireContext())
-                            .setTitle(getString(R.string.delete))
-                            .setMessage(getString(R.string.all_data_will_be_lost))
-                            .setPositiveButton(android.R.string.ok) { _, _ ->
-                                groupViewModel.delete(groupAdapter.getGroupAt(position))
-                            }
-                            .show()
-                        return true
+        if (menuButtonView == null)
+            return
+        else {
+            val popupMenu = PopupMenu(requireContext(), menuButtonView)
+            popupMenu.inflate(R.menu.edit_delete_menu)
+
+            popupMenu.setOnMenuItemClickListener(object : PopupMenu.OnMenuItemClickListener {
+                override fun onMenuItemClick(item: MenuItem?): Boolean {
+                    when (item?.itemId) {
+                        R.id.delete -> {
+                            AlertDialog.Builder(this@GroupFragment.requireContext())
+                                .setTitle(getString(R.string.delete))
+                                .setMessage(getString(R.string.all_data_will_be_lost))
+                                .setPositiveButton(android.R.string.ok) { _, _ ->
+                                    groupViewModel.delete(groupAdapter.getGroupAt(position))
+                                }
+                                .show()
+                            return true
+                        }
+                        R.id.edit -> {
+                            val group: Group = groupAdapter.getGroupAt(position)
+                            val intent = Intent(context, AddEditGroupActivity::class.java)
+                            intent.putExtra(AddEditGroupActivity.EXTRA_ID, group.id)
+                            intent.putExtra(AddEditGroupActivity.EXTRA_NAME, group.name)
+                            getEditedGroup.launch(intent)
+                            return true
+                        }
                     }
-                    R.id.edit -> {
-                        val group: Group = groupAdapter.getGroupAt(position)
-                        val intent = Intent(context, AddEditGroupActivity::class.java)
-                        intent.putExtra(AddEditGroupActivity.EXTRA_ID, group.id)
-                        intent.putExtra(AddEditGroupActivity.EXTRA_NAME, group.name)
-                        getEditedGroup.launch(intent)
-                        return true
-                    }
+                    return false
                 }
-                return false
-            }
-        })
+            })
 
-        popupMenu.show()
+            popupMenu.show()
+        }
     }
 
     private fun prepareAddEditGroupButton() {

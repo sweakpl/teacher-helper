@@ -1,16 +1,16 @@
 package com.sweak.teacherhelper.ui.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
-import androidx.core.view.get
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sweak.teacherhelper.R
-import com.sweak.teacherhelper.databinding.ActivityStudentActivitiesBinding
 import com.sweak.teacherhelper.adapter.recyclerview.StudentActivitiesAdapter
+import com.sweak.teacherhelper.databinding.ActivityStudentActivitiesBinding
 import com.sweak.teacherhelper.viewmodel.viewmodel.StudentActivitiesViewModel
 import com.sweak.teacherhelper.viewmodel.viewmodel.StudentActivitiesViewModelFactory
 
@@ -57,23 +57,34 @@ class StudentActivitiesActivity : AppCompatActivity() {
     }
 
     private fun showOptionsMenu(position: Int) {
-        val popupMenu = PopupMenu(this,
-            binding.recyclerViewStudentActivities[position].findViewById(R.id.text_view_student_activity_options))
-        popupMenu.inflate(R.menu.delete_menu)
+        val menuButtonView = binding.recyclerViewStudentActivities
+            .findViewHolderForLayoutPosition(position)?.itemView
+            ?.findViewById<TextView>(R.id.text_view_student_activity_options)
 
-        popupMenu.setOnMenuItemClickListener(object : PopupMenu.OnMenuItemClickListener {
-            override fun onMenuItemClick(item: MenuItem?): Boolean {
-                when (item?.itemId) {
-                    R.id.delete -> {
-                        studentActivitiesViewModel.delete(studentActivitiesAdapter.getStudentAt(position))
-                        return true
+        if (menuButtonView == null)
+            return
+        else {
+            val popupMenu = PopupMenu(this, menuButtonView)
+            popupMenu.inflate(R.menu.delete_menu)
+
+            popupMenu.setOnMenuItemClickListener(object : PopupMenu.OnMenuItemClickListener {
+                override fun onMenuItemClick(item: MenuItem?): Boolean {
+                    when (item?.itemId) {
+                        R.id.delete -> {
+                            studentActivitiesViewModel.delete(
+                                studentActivitiesAdapter.getStudentAt(
+                                    position
+                                )
+                            )
+                            return true
+                        }
                     }
+                    return false
                 }
-                return false
-            }
-        })
+            })
 
-        popupMenu.show()
+            popupMenu.show()
+        }
     }
 
     private fun setViewModelDataObserver() {

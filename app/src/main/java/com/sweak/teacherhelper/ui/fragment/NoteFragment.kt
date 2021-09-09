@@ -7,19 +7,19 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.PopupMenu
-import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sweak.teacherhelper.R
+import com.sweak.teacherhelper.adapter.recyclerview.NoteAdapter
 import com.sweak.teacherhelper.database.entity.Note
 import com.sweak.teacherhelper.databinding.FragmentNoteBinding
 import com.sweak.teacherhelper.ui.activity.AddEditNoteActivity
-import com.sweak.teacherhelper.adapter.recyclerview.NoteAdapter
 import com.sweak.teacherhelper.viewmodel.viewmodel.NoteViewModel
 import com.sweak.teacherhelper.viewmodel.viewmodel.NoteViewModelFactory
 
@@ -110,32 +110,38 @@ class NoteFragment : Fragment() {
     }
 
     private fun showOptionsMenu(position: Int) {
-        val popupMenu = PopupMenu(requireContext(),
-            binding.recyclerViewNotes[position].findViewById(R.id.text_view_student_activity_options))
-        popupMenu.inflate(R.menu.edit_delete_menu)
+        val menuButtonView = binding.recyclerViewNotes.findViewHolderForLayoutPosition(position)
+            ?.itemView?.findViewById<TextView>(R.id.text_view_student_activity_options)
 
-        popupMenu.setOnMenuItemClickListener(object : PopupMenu.OnMenuItemClickListener {
-            override fun onMenuItemClick(item: MenuItem?): Boolean {
-                when (item?.itemId) {
-                    R.id.delete -> {
-                        noteViewModel.delete(noteAdapter.getNoteAt(position))
-                        return true
+        if (menuButtonView == null)
+            return
+        else {
+            val popupMenu = PopupMenu(requireContext(), menuButtonView)
+            popupMenu.inflate(R.menu.edit_delete_menu)
+
+            popupMenu.setOnMenuItemClickListener(object : PopupMenu.OnMenuItemClickListener {
+                override fun onMenuItemClick(item: MenuItem?): Boolean {
+                    when (item?.itemId) {
+                        R.id.delete -> {
+                            noteViewModel.delete(noteAdapter.getNoteAt(position))
+                            return true
+                        }
+                        R.id.edit -> {
+                            val note: Note = noteAdapter.getNoteAt(position)
+                            val intent = Intent(context, AddEditNoteActivity::class.java)
+                            intent.putExtra(AddEditNoteActivity.EXTRA_ID, note.id)
+                            intent.putExtra(AddEditNoteActivity.EXTRA_TITLE, note.title)
+                            intent.putExtra(AddEditNoteActivity.EXTRA_DESCRIPTION, note.description)
+                            getEditedNote.launch(intent)
+                            return true
+                        }
                     }
-                    R.id.edit -> {
-                        val note: Note = noteAdapter.getNoteAt(position)
-                        val intent = Intent(context, AddEditNoteActivity::class.java)
-                        intent.putExtra(AddEditNoteActivity.EXTRA_ID, note.id)
-                        intent.putExtra(AddEditNoteActivity.EXTRA_TITLE, note.title)
-                        intent.putExtra(AddEditNoteActivity.EXTRA_DESCRIPTION, note.description)
-                        getEditedNote.launch(intent)
-                        return true
-                    }
+                    return false
                 }
-                return false
-            }
-        })
+            })
 
-        popupMenu.show()
+            popupMenu.show()
+        }
     }
 
     private fun prepareAddEditNoteButton() {

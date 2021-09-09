@@ -7,12 +7,12 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.PopupMenu
-import androidx.core.view.get
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sweak.teacherhelper.R
@@ -126,40 +126,56 @@ class StudentActivity : AppCompatActivity() {
     }
 
     private fun showOptionsMenu(position: Int) {
-        val popupMenu = PopupMenu(this,
-            binding.recyclerViewStudents[position].findViewById(R.id.text_view_student_options))
-        popupMenu.inflate(R.menu.edit_delete_menu)
+        val menuButtonView = binding.recyclerViewStudents.findViewHolderForLayoutPosition(position)
+            ?.itemView?.findViewById<TextView>(R.id.text_view_student_options)
 
-        popupMenu.setOnMenuItemClickListener(object : PopupMenu.OnMenuItemClickListener {
-            override fun onMenuItemClick(item: MenuItem?): Boolean {
-                when (item?.itemId) {
-                    R.id.delete -> {
-                        AlertDialog.Builder(this@StudentActivity)
-                            .setTitle(getString(R.string.delete))
-                            .setMessage(getString(R.string.all_data_will_be_lost))
-                            .setPositiveButton(android.R.string.ok) { _, _ ->
-                                studentViewModel.delete(studentAdapter.getStudentAt(position))
-                            }
-                            .show()
-                        return true
+        if (menuButtonView == null)
+            return
+        else {
+            val popupMenu = PopupMenu(this, menuButtonView)
+            popupMenu.inflate(R.menu.edit_delete_menu)
+
+            popupMenu.setOnMenuItemClickListener(object : PopupMenu.OnMenuItemClickListener {
+                override fun onMenuItemClick(item: MenuItem?): Boolean {
+                    when (item?.itemId) {
+                        R.id.delete -> {
+                            AlertDialog.Builder(this@StudentActivity)
+                                .setTitle(getString(R.string.delete))
+                                .setMessage(getString(R.string.all_data_will_be_lost))
+                                .setPositiveButton(android.R.string.ok) { _, _ ->
+                                    studentViewModel.delete(studentAdapter.getStudentAt(position))
+                                }
+                                .show()
+                            return true
+                        }
+                        R.id.edit -> {
+                            val student: Student = studentAdapter.getStudentAt(position)
+                            val intent =
+                                Intent(this@StudentActivity, AddEditStudentActivity::class.java)
+                            intent.putExtra(AddEditStudentActivity.EXTRA_ID, student.id)
+                            intent.putExtra(
+                                AddEditStudentActivity.EXTRA_FIRST_NAME,
+                                student.firstName
+                            )
+                            intent.putExtra(
+                                AddEditStudentActivity.EXTRA_LAST_NAME,
+                                student.lastName
+                            )
+                            intent.putExtra(
+                                AddEditStudentActivity.EXTRA_CLASS_NAME,
+                                student.className
+                            )
+                            intent.putExtra(AddEditStudentActivity.EXTRA_GROUP_ID, student.groupId)
+                            getEditedStudent.launch(intent)
+                            return true
+                        }
                     }
-                    R.id.edit -> {
-                        val student: Student = studentAdapter.getStudentAt(position)
-                        val intent = Intent(this@StudentActivity, AddEditStudentActivity::class.java)
-                        intent.putExtra(AddEditStudentActivity.EXTRA_ID, student.id)
-                        intent.putExtra(AddEditStudentActivity.EXTRA_FIRST_NAME, student.firstName)
-                        intent.putExtra(AddEditStudentActivity.EXTRA_LAST_NAME, student.lastName)
-                        intent.putExtra(AddEditStudentActivity.EXTRA_CLASS_NAME, student.className)
-                        intent.putExtra(AddEditStudentActivity.EXTRA_GROUP_ID, student.groupId)
-                        getEditedStudent.launch(intent)
-                        return true
-                    }
+                    return false
                 }
-                return false
-            }
-        })
+            })
 
-        popupMenu.show()
+            popupMenu.show()
+        }
     }
 
     private fun prepareAddEditStudentButton() {
