@@ -20,6 +20,4 @@
     </style>
 
     <style name="Theme.TeacherNotebook.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="Theme.TeacherNotebook.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

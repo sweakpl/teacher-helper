@@ -47,16 +47,21 @@ class StudentControlActivity : AppCompatActivity() {
             object : StudentControlAdapter.CheckboxCheckedListener {
                 override fun onChecked(isChecked: Boolean, position: Int) {
                     studentControlActivityBuffer.handleCheckboxSelection(
-                        isChecked, studentControlAdapter.getStudentAt(position).id)
+                        isChecked, studentControlAdapter.getStudentAt(position).id
+                    )
                 }
             },
             object : StudentControlAdapter.SpinnerItemSelectedListener {
-                override fun onSelected
-                            (parent: AdapterView<*>?, adapterViewPosition: Int, recyclerViewPosition: Int) {
+                override fun onSelected(
+                    parent: AdapterView<*>?,
+                    adapterViewPosition: Int,
+                    recyclerViewPosition: Int
+                ) {
                     if (parent != null) {
                         studentControlActivityBuffer.handleSpinnerSelection(
                             parent.getItemAtPosition(adapterViewPosition).toString(),
-                            studentControlAdapter.getStudentAt(recyclerViewPosition).id)
+                            studentControlAdapter.getStudentAt(recyclerViewPosition).id
+                        )
                     }
                 }
 
@@ -83,7 +88,7 @@ class StudentControlActivity : AppCompatActivity() {
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean = when(item.itemId) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
         R.id.save -> {
             saveActivitiesIfPossibleAndFinish()
             true
@@ -96,8 +101,7 @@ class StudentControlActivity : AppCompatActivity() {
             Toast.makeText(this, getString(R.string.activities_saved), Toast.LENGTH_SHORT)
                 .show()
             finish()
-        }
-        else
+        } else
             Toast.makeText(this, getString(R.string.nothing_to_save), Toast.LENGTH_SHORT)
                 .show()
     }

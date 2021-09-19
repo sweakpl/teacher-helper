@@ -29,48 +29,48 @@ class GroupFragment : Fragment() {
     private val groupViewModel: GroupViewModel by viewModels()
     private lateinit var groupAdapter: GroupAdapter
     private var _binding: FragmentGroupBinding? = null
+
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
 
-    private val getNewGroup = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            result: ActivityResult ->
-        var toastMessage: String = getString(R.string.group_not_saved)
+    private val getNewGroup =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            var toastMessage: String = getString(R.string.group_not_saved)
 
-        if (result.resultCode == Activity.RESULT_OK) {
-            val name: String? = result.data?.getStringExtra(AddEditGroupActivity.EXTRA_NAME)
+            if (result.resultCode == Activity.RESULT_OK) {
+                val name: String? = result.data?.getStringExtra(AddEditGroupActivity.EXTRA_NAME)
 
-            if (name != null) {
-                groupViewModel.insert(Group(name))
-                toastMessage = getString(R.string.group_saved)
-            }
-        }
-
-        Toast.makeText(context, toastMessage, Toast.LENGTH_SHORT).show()
-    }
-
-    private val getEditedGroup = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            result: ActivityResult ->
-        var toastMessage: String = getString(R.string.group_not_edited)
-
-        if (result.resultCode == Activity.RESULT_OK) {
-            val id: Int? = result.data?.getIntExtra(AddEditGroupActivity.EXTRA_ID, -1)
-            val name: String? = result.data?.getStringExtra(AddEditGroupActivity.EXTRA_NAME)
-
-            if (id != null && name != null) {
-                if (id != -1) {
-                    val group = Group(name)
-                    group.id = id
-                    groupViewModel.update(group)
-
-                    toastMessage = getString(R.string.group_updated)
+                if (name != null) {
+                    groupViewModel.insert(Group(name))
+                    toastMessage = getString(R.string.group_saved)
                 }
-                else
-                    toastMessage = getString(R.string.cant_update_group)
             }
+
+            Toast.makeText(context, toastMessage, Toast.LENGTH_SHORT).show()
         }
 
-        Toast.makeText(context, toastMessage, Toast.LENGTH_SHORT).show()
-    }
+    private val getEditedGroup =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            var toastMessage: String = getString(R.string.group_not_edited)
+
+            if (result.resultCode == Activity.RESULT_OK) {
+                val id: Int? = result.data?.getIntExtra(AddEditGroupActivity.EXTRA_ID, -1)
+                val name: String? = result.data?.getStringExtra(AddEditGroupActivity.EXTRA_NAME)
+
+                if (id != null && name != null) {
+                    if (id != -1) {
+                        val group = Group(name)
+                        group.id = id
+                        groupViewModel.update(group)
+
+                        toastMessage = getString(R.string.group_updated)
+                    } else
+                        toastMessage = getString(R.string.cant_update_group)
+                }
+            }
+
+            Toast.makeText(context, toastMessage, Toast.LENGTH_SHORT).show()
+        }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -96,12 +96,14 @@ class GroupFragment : Fragment() {
                 showOptionsMenu(position)
             }
         },
-        object : GroupAdapter.ItemClickListener {
-            override fun onItemClickListener(position: Int) {
-                showGroupStudents(groupAdapter.getGroupAt(position).id,
-                    groupAdapter.getGroupAt(position).name)
-            }
-        })
+            object : GroupAdapter.ItemClickListener {
+                override fun onItemClickListener(position: Int) {
+                    showGroupStudents(
+                        groupAdapter.getGroupAt(position).id,
+                        groupAdapter.getGroupAt(position).name
+                    )
+                }
+            })
 
         binding.recyclerViewGroups.adapter = groupAdapter
     }

@@ -16,14 +16,14 @@ class StudentControlAdapter(
     private var context: Context,
     private var checkboxCheckedListener: CheckboxCheckedListener,
     private var spinnerItemSelectedListener: SpinnerItemSelectedListener
-    ) : RecyclerView.Adapter<StudentControlAdapter.StudentControlHolder>() {
+) : RecyclerView.Adapter<StudentControlAdapter.StudentControlHolder>() {
 
     private var students: List<Student> = ArrayList()
     private var missingKits: List<MissingKitTuple> = ArrayList()
     private lateinit var activityAdapter: ArrayAdapter<CharSequence>
 
-    class StudentControlHolder(val binding: StudentControlSessionItemBinding)
-        : RecyclerView.ViewHolder(binding.root)
+    class StudentControlHolder(val binding: StudentControlSessionItemBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     interface CheckboxCheckedListener {
         fun onChecked(isChecked: Boolean, position: Int)
@@ -40,33 +40,38 @@ class StudentControlAdapter(
     }
 
     override fun onBindViewHolder(holder: StudentControlHolder, position: Int) {
-        with (holder) {
+        with(holder) {
             with(students[holder.absoluteAdapterPosition]) {
                 binding.textViewStudentFullName.text =
                     context.getString(R.string.full_name_template, this.firstName, this.lastName)
                 binding.textViewMissingKitCount.text =
-                    context.getString(R.string.missing_kit_count, getMissingKitCountOfStudent(this.id))
+                    context.getString(
+                        R.string.missing_kit_count,
+                        getMissingKitCountOfStudent(this.id)
+                    )
                 prepareActivitySpinner(binding)
 
-                binding.checkboxMissingKit.setOnCheckedChangeListener {_, isChecked ->
+                binding.checkboxMissingKit.setOnCheckedChangeListener { _, isChecked ->
                     checkboxCheckedListener.onChecked(isChecked, holder.absoluteAdapterPosition)
                 }
 
-                binding.spinnerActivity.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                    override fun onItemSelected(
-                        parent: AdapterView<*>?, view: View?, adapterViewPosition: Int, id: Long)
-                    {
-                        spinnerItemSelectedListener.onSelected(
-                            parent, adapterViewPosition, holder.absoluteAdapterPosition)
+                binding.spinnerActivity.onItemSelectedListener =
+                    object : AdapterView.OnItemSelectedListener {
+                        override fun onItemSelected(
+                            parent: AdapterView<*>?, view: View?, adapterViewPosition: Int, id: Long
+                        ) {
+                            spinnerItemSelectedListener.onSelected(
+                                parent, adapterViewPosition, holder.absoluteAdapterPosition
+                            )
+                        }
+
+                        override fun onNothingSelected(parent: AdapterView<*>?) {}
                     }
-                    override fun onNothingSelected(parent: AdapterView<*>?) {}
-                }
             }
         }
     }
 
-    private fun getMissingKitCountOfStudent(id: Int): Int
-    {
+    private fun getMissingKitCountOfStudent(id: Int): Int {
         for (missingKitCount in missingKits) {
             if (missingKitCount.studentId == id)
                 return missingKitCount.missingKitCount
@@ -75,8 +80,10 @@ class StudentControlAdapter(
     }
 
     private fun prepareActivitySpinner(binding: StudentControlSessionItemBinding) {
-        activityAdapter = ArrayAdapter.createFromResource(context,
-            R.array.activity_grades, android.R.layout.simple_spinner_item)
+        activityAdapter = ArrayAdapter.createFromResource(
+            context,
+            R.array.activity_grades, android.R.layout.simple_spinner_item
+        )
 
         activityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 

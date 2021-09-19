@@ -16,8 +16,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
-            android:hint="@string/hint_name"/>
+            android:hint="@string/hint_name"
+            android:inputType="text" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -31,16 +31,16 @@
             android:id="@+id/text_input_time_start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_marginEnd="8dp"
+            android:layout_weight="1"
             android:focusable="false">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
                 android:focusable="false"
-                android:hint="@string/hint_time_start"/>
+                android:hint="@string/hint_time_start"
+                android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -48,16 +48,16 @@
             android:id="@+id/text_input_time_end"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_marginStart="8dp"
+            android:layout_weight="1"
             android:focusable="false">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
                 android:focusable="false"
-                android:hint="@string/hint_time_end"/>
+                android:hint="@string/hint_time_end"
+                android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

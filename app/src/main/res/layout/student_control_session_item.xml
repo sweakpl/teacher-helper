@@ -2,39 +2,37 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginEnd="8dp"
     android:layout_marginStart="8dp"
-    android:layout_marginTop="8dp">
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp">
 
     <TextView
         android:id="@+id/text_view_student_full_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_toStartOf="@id/spinner_activity"
         android:layout_centerVertical="true"
+        android:layout_toStartOf="@id/spinner_activity"
         android:ellipsize="end"
         android:maxLines="1"
-        android:text="Full name"
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     <TextView
         android:id="@+id/text_view_missing_kit_count"
-        android:layout_marginTop="8dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/text_view_student_full_name"
+        android:layout_marginTop="8dp"
         android:ellipsize="end"
-        android:maxLines="1"
-        android:text="Missing kits: 3" />
+        android:maxLines="1" />
 
     <Spinner
         android:id="@+id/spinner_activity"
+        style="@style/Widget.AppCompat.Spinner.Underlined"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toStartOf="@id/checkbox_missing_kit"
         android:layout_centerVertical="true"
-        style="@style/Widget.AppCompat.Spinner.Underlined" />
+        android:layout_toStartOf="@id/checkbox_missing_kit" />
 
     <CheckBox
         android:id="@+id/checkbox_missing_kit"

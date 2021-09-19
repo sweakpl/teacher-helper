@@ -3,18 +3,18 @@
     package="com.sweak.teacherhelper">
 
     <application
-        android:allowBackup="true"
         android:name=".TeacherHelperApplication"
+        android:allowBackup="true"
         android:icon="@mipmap/teacher_helper_icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TeacherNotebook" >
+        android:theme="@style/Theme.TeacherNotebook">
         <activity
             android:name=".features.main.MainActivity"
+            android:exported="true"
             android:label="@string/app_name"
             android:launchMode="singleTop"
-            android:theme="@style/Theme.TeacherNotebook.NoActionBar"
-            android:exported="true" >
+            android:theme="@style/Theme.TeacherNotebook.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -41,7 +41,7 @@
             android:parentActivityName=".features.student.StudentActivity" />
         <activity
             android:name=".features.studentactivities.StudentActivitiesActivity"
-            android:parentActivityName=".features.student.StudentActivity"/>
+            android:parentActivityName=".features.student.StudentActivity" />
     </application>
 
 </manifest>

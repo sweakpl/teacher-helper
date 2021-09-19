@@ -16,7 +16,9 @@ interface StudentDao {
     @Update
     fun updateStudent(vararg student: Student)
 
-    @Query("SELECT * FROM students WHERE group_id = :groupId" +
-            " ORDER BY class_name, first_name, last_name ASC")
+    @Query(
+        "SELECT * FROM students WHERE group_id = :groupId" +
+                " ORDER BY class_name, first_name, last_name ASC"
+    )
     fun getAll(groupId: Int): LiveData<List<Student>>
 }

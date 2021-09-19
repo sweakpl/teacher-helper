@@ -11,9 +11,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class StudentControlViewModel @Inject constructor(
-    val missingKitsRepository: MissingKitsRepository,
-    val studentRepository: StudentRepository
-    ) : ViewModel() {
+    private val missingKitsRepository: MissingKitsRepository,
+    private val studentRepository: StudentRepository
+) : ViewModel() {
 
     lateinit var allStudents: LiveData<List<Student>>
     lateinit var missingKits: LiveData<List<MissingKitTuple>>

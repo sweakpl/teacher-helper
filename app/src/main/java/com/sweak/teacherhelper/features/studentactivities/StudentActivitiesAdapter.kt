@@ -16,8 +16,8 @@ class StudentActivitiesAdapter(
     private var optionsMenuClickListener: OptionsMenuClickListener
 ) : ListAdapter<StudentActivity, StudentActivitiesAdapter.StudentActivityHolder>(DIFF_CALLBACK) {
 
-    class StudentActivityHolder(val binding: StudentActivityItemBinding)
-        : RecyclerView.ViewHolder(binding.root)
+    class StudentActivityHolder(val binding: StudentActivityItemBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     interface OptionsMenuClickListener {
         fun onOptionsMenuClicked(position: Int)
@@ -30,8 +30,8 @@ class StudentActivitiesAdapter(
     }
 
     override fun onBindViewHolder(holder: StudentActivityHolder, position: Int) {
-        with (holder) {
-            with (getItem(holder.absoluteAdapterPosition)) {
+        with(holder) {
+            with(getItem(holder.absoluteAdapterPosition)) {
                 binding.textViewStudentActivityType.text = when (this.activityType) {
                     StudentActivity.MISSING_KIT_ACTIVITY_TYPE ->
                         context.getString(R.string.missing_kit)
@@ -60,10 +60,17 @@ class StudentActivitiesAdapter(
     companion object {
         private val DIFF_CALLBACK: DiffUtil.ItemCallback<StudentActivity> =
             object : DiffUtil.ItemCallback<StudentActivity>() {
-                override fun areItemsTheSame(oldItem: StudentActivity, newItem: StudentActivity): Boolean {
+                override fun areItemsTheSame(
+                    oldItem: StudentActivity,
+                    newItem: StudentActivity
+                ): Boolean {
                     return oldItem.id == newItem.id
                 }
-                override fun areContentsTheSame(oldItem: StudentActivity, newItem: StudentActivity): Boolean {
+
+                override fun areContentsTheSame(
+                    oldItem: StudentActivity,
+                    newItem: StudentActivity
+                ): Boolean {
                     return (oldItem.activityType == newItem.activityType) and
                             (oldItem.studentId == newItem.studentId)
                 }

@@ -50,19 +50,25 @@ class AddEditScheduleActivity : AppCompatActivity() {
 
         val calendar = Calendar.getInstance()
 
-        val pickerTimeStart: TimePickerDialog = object : TimePickerDialog(this,
+        val pickerTimeStart: TimePickerDialog = object : TimePickerDialog(
+            this,
             OnTimeSetListener { _, hourOfDay, minute ->
-                binding.textInputTimeStart.editText!!.setText(getTimeString(hourOfDay, minute)) },
-            calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true) {}
+                binding.textInputTimeStart.editText!!.setText(getTimeString(hourOfDay, minute))
+            },
+            calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true
+        ) {}
 
         binding.textInputTimeStart.editText!!.setOnClickListener {
             pickerTimeStart.show()
         }
 
-        val pickerTimeEnd: TimePickerDialog = object : TimePickerDialog(this,
+        val pickerTimeEnd: TimePickerDialog = object : TimePickerDialog(
+            this,
             OnTimeSetListener { _, hourOfDay, minute ->
-                binding.textInputTimeEnd.editText!!.setText(getTimeString(hourOfDay, minute)) },
-            calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true) {}
+                binding.textInputTimeEnd.editText!!.setText(getTimeString(hourOfDay, minute))
+            },
+            calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true
+        ) {}
 
         binding.textInputTimeEnd.editText!!.setOnClickListener {
             pickerTimeEnd.show()
@@ -86,8 +92,10 @@ class AddEditScheduleActivity : AppCompatActivity() {
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean = when(item.itemId) {
-        R.id.save -> {saveActivity(); true}
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
+        R.id.save -> {
+            saveActivity(); true
+        }
         else -> super.onOptionsItemSelected(item)
     }
 
@@ -97,7 +105,8 @@ class AddEditScheduleActivity : AppCompatActivity() {
         val timeEnd: String = binding.textInputTimeEnd.editText!!.text.toString()
 
         if (activity.isEmpty() || timeStart.isEmpty() || timeEnd.isEmpty()) {
-            Toast.makeText(this, getString(R.string.insert_activity_and_time), Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getString(R.string.insert_activity_and_time), Toast.LENGTH_LONG)
+                .show()
             return
         }
 

@@ -7,8 +7,8 @@ import com.sweak.teacherhelper.data.database.entity.Schedule
 import javax.inject.Inject
 
 class ScheduleRepository @Inject constructor(
-    private val scheduleDao: ScheduleDao) {
-
+    private val scheduleDao: ScheduleDao
+) {
     fun getAllSchedule(day: String): LiveData<List<Schedule>> =
         scheduleDao.getAll(day)
 

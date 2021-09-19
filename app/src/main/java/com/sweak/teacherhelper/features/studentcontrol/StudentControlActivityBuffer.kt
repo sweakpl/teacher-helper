@@ -8,8 +8,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class StudentControlActivityBuffer @Inject constructor(
-    val studentActivityDao: StudentActivityDao) {
-    
+    val studentActivityDao: StudentActivityDao
+) {
     private val studentActivityMap = mutableMapOf<Int, String>()
     private val studentMissingKitSet = mutableSetOf<Int>()
 
@@ -34,7 +34,8 @@ class StudentControlActivityBuffer @Inject constructor(
         CoroutineScope(Dispatchers.IO).launch {
             for (studentMissingKit in studentMissingKitSet)
                 studentActivityDao.insertAll(
-                    StudentActivity(StudentActivity.MISSING_KIT_ACTIVITY_TYPE, studentMissingKit))
+                    StudentActivity(StudentActivity.MISSING_KIT_ACTIVITY_TYPE, studentMissingKit)
+                )
         }
 
         CoroutineScope(Dispatchers.IO).launch {
@@ -46,12 +47,15 @@ class StudentControlActivityBuffer @Inject constructor(
                             StudentActivity.MINUS_ACTIVITY_TYPE
                         else
                             StudentActivity.PLUS_ACTIVITY_TYPE,
-                        studentId = studentActivity.key))
+                        studentId = studentActivity.key
+                    )
+                )
             }
         }
 
         return true
     }
 
-    private fun containsData() = studentActivityMap.isNotEmpty() or studentMissingKitSet.isNotEmpty()
+    private fun containsData() =
+        studentActivityMap.isNotEmpty() or studentMissingKitSet.isNotEmpty()
 }

@@ -18,6 +18,7 @@ import java.util.*
 class WeekScheduleFragment : Fragment() {
 
     private var _binding: FragmentWeekScheduleBinding? = null
+
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
 
@@ -25,7 +26,7 @@ class WeekScheduleFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding =  FragmentWeekScheduleBinding.inflate(inflater, container, false)
+        _binding = FragmentWeekScheduleBinding.inflate(inflater, container, false)
         val root = binding.root
 
         prepareViewPager(savedInstanceState)
@@ -56,23 +57,23 @@ class WeekScheduleFragment : Fragment() {
                 resources.getColor(R.color.white, null),
                 resources.getColor(R.color.white, null)
             )
-        }
-        else {
+        } else {
             binding.tabLayout.setSelectedTabIndicatorColor(resources.getColor(R.color.white))
             binding.tabLayout.setTabTextColors(
-                resources.getColor(R.color.white), resources.getColor(R.color.white))
+                resources.getColor(R.color.white), resources.getColor(R.color.white)
+            )
         }
     }
 
     private fun getCurrentDayIndex(): Int =
-        when(Calendar.getInstance().get(Calendar.DAY_OF_WEEK)) {
+        when (Calendar.getInstance().get(Calendar.DAY_OF_WEEK)) {
             Calendar.MONDAY -> 0
             Calendar.TUESDAY -> 1
             Calendar.WEDNESDAY -> 2
             Calendar.THURSDAY -> 3
             Calendar.FRIDAY -> 4
             else -> 0
-    }
+        }
 
     private fun getTabTitle(position: Int): CharSequence {
         return when (position) {

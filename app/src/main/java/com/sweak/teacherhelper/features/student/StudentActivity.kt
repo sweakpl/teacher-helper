@@ -32,52 +32,59 @@ class StudentActivity : AppCompatActivity() {
     private val studentViewModel: StudentViewModel by viewModels()
     private lateinit var studentAdapter: StudentAdapter
 
-    private val getNewStudent = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            result: ActivityResult ->
-        var toastMessage: String = getString(R.string.student_not_saved)
+    private val getNewStudent =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            var toastMessage: String = getString(R.string.student_not_saved)
 
-        if (result.resultCode == Activity.RESULT_OK) {
-            val firstName: String? = result.data?.getStringExtra(AddEditStudentActivity.EXTRA_FIRST_NAME)
-            val lastName: String? = result.data?.getStringExtra(AddEditStudentActivity.EXTRA_LAST_NAME)
-            val className: String? = result.data?.getStringExtra(AddEditStudentActivity.EXTRA_CLASS_NAME)
-            val groupId: Int? = result.data?.getIntExtra(AddEditStudentActivity.EXTRA_GROUP_ID, -1)
+            if (result.resultCode == Activity.RESULT_OK) {
+                val firstName: String? =
+                    result.data?.getStringExtra(AddEditStudentActivity.EXTRA_FIRST_NAME)
+                val lastName: String? =
+                    result.data?.getStringExtra(AddEditStudentActivity.EXTRA_LAST_NAME)
+                val className: String? =
+                    result.data?.getStringExtra(AddEditStudentActivity.EXTRA_CLASS_NAME)
+                val groupId: Int? =
+                    result.data?.getIntExtra(AddEditStudentActivity.EXTRA_GROUP_ID, -1)
 
-            if (firstName != null && lastName != null && className != null && groupId != null) {
-                studentViewModel.insert(Student(firstName, lastName, className, groupId))
+                if (firstName != null && lastName != null && className != null && groupId != null) {
+                    studentViewModel.insert(Student(firstName, lastName, className, groupId))
 
-                toastMessage = getString(R.string.student_saved)
-            }
-        }
-
-        Toast.makeText(this, toastMessage, Toast.LENGTH_SHORT).show()
-    }
-
-    private val getEditedStudent = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            result: ActivityResult ->
-        var toastMessage: String = getString(R.string.student_not_edited)
-
-        if (result.resultCode == Activity.RESULT_OK) {
-            val id: Int? = result.data?.getIntExtra(AddEditStudentActivity.EXTRA_ID, -1)
-            val firstName: String? = result.data?.getStringExtra(AddEditStudentActivity.EXTRA_FIRST_NAME)
-            val lastName: String? = result.data?.getStringExtra(AddEditStudentActivity.EXTRA_LAST_NAME)
-            val className: String? = result.data?.getStringExtra(AddEditStudentActivity.EXTRA_CLASS_NAME)
-            val groupId: Int? = result.data?.getIntExtra(AddEditStudentActivity.EXTRA_GROUP_ID, -1)
-
-            if (id != null && firstName != null && lastName != null && className != null && groupId != null) {
-                if (id != -1) {
-                    val student = Student(firstName, lastName, className, groupId)
-                    student.id = id
-                    studentViewModel.update(student)
-
-                    toastMessage = getString(R.string.student_updated)
+                    toastMessage = getString(R.string.student_saved)
                 }
-                else
-                    toastMessage = getString(R.string.cant_update_student)
             }
+
+            Toast.makeText(this, toastMessage, Toast.LENGTH_SHORT).show()
         }
 
-        Toast.makeText(this, toastMessage, Toast.LENGTH_SHORT).show()
-    }
+    private val getEditedStudent =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            var toastMessage: String = getString(R.string.student_not_edited)
+
+            if (result.resultCode == Activity.RESULT_OK) {
+                val id: Int? = result.data?.getIntExtra(AddEditStudentActivity.EXTRA_ID, -1)
+                val firstName: String? =
+                    result.data?.getStringExtra(AddEditStudentActivity.EXTRA_FIRST_NAME)
+                val lastName: String? =
+                    result.data?.getStringExtra(AddEditStudentActivity.EXTRA_LAST_NAME)
+                val className: String? =
+                    result.data?.getStringExtra(AddEditStudentActivity.EXTRA_CLASS_NAME)
+                val groupId: Int? =
+                    result.data?.getIntExtra(AddEditStudentActivity.EXTRA_GROUP_ID, -1)
+
+                if (id != null && firstName != null && lastName != null && className != null && groupId != null) {
+                    if (id != -1) {
+                        val student = Student(firstName, lastName, className, groupId)
+                        student.id = id
+                        studentViewModel.update(student)
+
+                        toastMessage = getString(R.string.student_updated)
+                    } else
+                        toastMessage = getString(R.string.cant_update_student)
+                }
+            }
+
+            Toast.makeText(this, toastMessage, Toast.LENGTH_SHORT).show()
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -102,15 +109,15 @@ class StudentActivity : AppCompatActivity() {
 
         studentAdapter = StudentAdapter(this,
             object : StudentAdapter.ItemClickListener {
-            override fun onItemClickListener(position: Int) {
-                showStudentActivities(position)
-            }
-        },
+                override fun onItemClickListener(position: Int) {
+                    showStudentActivities(position)
+                }
+            },
             object : StudentAdapter.OptionsMenuClickListener {
-            override fun onOptionsMenuClicked(position: Int) {
-                showOptionsMenu(position)
-            }
-        })
+                override fun onOptionsMenuClicked(position: Int) {
+                    showOptionsMenu(position)
+                }
+            })
 
         binding.recyclerViewStudents.adapter = studentAdapter
     }
@@ -181,14 +188,16 @@ class StudentActivity : AppCompatActivity() {
             val intent = Intent(this, AddEditStudentActivity::class.java)
             intent.putExtra(
                 AddEditStudentActivity.EXTRA_GROUP_ID,
-                this.intent.getIntExtra(GroupFragment.EXTRA_GROUP_ID, -1))
+                this.intent.getIntExtra(GroupFragment.EXTRA_GROUP_ID, -1)
+            )
             getNewStudent.launch(intent)
         }
     }
 
     private fun setViewModelDataObserver() {
         studentViewModel.initializeAllStudents(
-            intent.getIntExtra(GroupFragment.EXTRA_GROUP_ID, -1))
+            intent.getIntExtra(GroupFragment.EXTRA_GROUP_ID, -1)
+        )
 
         studentViewModel.allStudents.observe(this, { students ->
             studentAdapter.submitList(students)
@@ -203,13 +212,15 @@ class StudentActivity : AppCompatActivity() {
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean = when(item.itemId) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
         R.id.start_control -> {
             if (studentViewModel.allStudents.value!!.isNotEmpty())
                 startControlSession()
             else
-                Toast.makeText(this,
-                    getString(R.string.cant_start_control), Toast.LENGTH_SHORT)
+                Toast.makeText(
+                    this,
+                    getString(R.string.cant_start_control), Toast.LENGTH_SHORT
+                )
                     .show()
             true
         }
@@ -220,10 +231,12 @@ class StudentActivity : AppCompatActivity() {
         val intent = Intent(this, StudentControlActivity::class.java)
         intent.putExtra(
             GroupFragment.EXTRA_GROUP_ID,
-            this.intent.getIntExtra(GroupFragment.EXTRA_GROUP_ID, -1))
+            this.intent.getIntExtra(GroupFragment.EXTRA_GROUP_ID, -1)
+        )
         intent.putExtra(
             GroupFragment.EXTRA_GROUP_NAME,
-            this.intent.getStringExtra(GroupFragment.EXTRA_GROUP_NAME))
+            this.intent.getStringExtra(GroupFragment.EXTRA_GROUP_NAME)
+        )
 
         startActivity(intent)
     }

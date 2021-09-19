@@ -45,12 +45,13 @@ class MainActivity : AppCompatActivity() {
             binding.tabLayout.setSelectedTabIndicatorColor(resources.getColor(R.color.white, null))
             binding.tabLayout.setTabTextColors(
                 resources.getColor(R.color.white, null),
-                resources.getColor(R.color.white, null))
-        }
-        else {
+                resources.getColor(R.color.white, null)
+            )
+        } else {
             binding.tabLayout.setSelectedTabIndicatorColor(resources.getColor(R.color.white))
             binding.tabLayout.setTabTextColors(
-                resources.getColor(R.color.white), resources.getColor(R.color.white))
+                resources.getColor(R.color.white), resources.getColor(R.color.white)
+            )
         }
     }
 

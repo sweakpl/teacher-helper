@@ -10,6 +10,7 @@ import com.sweak.teacherhelper.R
 import com.sweak.teacherhelper.databinding.ActivityAddEditStudentBinding
 
 class AddEditStudentActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivityAddEditStudentBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,8 +45,10 @@ class AddEditStudentActivity : AppCompatActivity() {
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean = when(item.itemId) {
-        R.id.save -> {saveStudent(); true}
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
+        R.id.save -> {
+            saveStudent(); true
+        }
         else -> super.onOptionsItemSelected(item)
     }
 
@@ -56,7 +59,8 @@ class AddEditStudentActivity : AppCompatActivity() {
         val groupId: Int = intent.getIntExtra(EXTRA_GROUP_ID, -1)
 
         if (firstName.isEmpty() || lastName.isEmpty() || className.isEmpty()) {
-            Toast.makeText(this, getString(R.string.insert_full_name_and_class), Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getString(R.string.insert_full_name_and_class), Toast.LENGTH_LONG)
+                .show()
             return
         }
 

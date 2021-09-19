@@ -43,8 +43,10 @@ class AddEditGroupActivity : AppCompatActivity() {
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean = when(item.itemId) {
-        R.id.save -> {saveGroup(); true}
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
+        R.id.save -> {
+            saveGroup(); true
+        }
         else -> super.onOptionsItemSelected(item)
     }
 

@@ -14,7 +14,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sweak.teacherhelper.R
 import com.sweak.teacherhelper.data.database.entity.Schedule
@@ -29,59 +28,65 @@ class DayScheduleFragment : Fragment() {
     private lateinit var day: String
     private val scheduleViewModel: ScheduleViewModel by viewModels()
     private lateinit var scheduleAdapter: ScheduleAdapter
+
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
 
-    private val getNewSchedule = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            result: ActivityResult ->
-        var toastMessage: String = getString(R.string.schedule_not_saved)
+    private val getNewSchedule =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            var toastMessage: String = getString(R.string.schedule_not_saved)
 
-        if (result.resultCode == Activity.RESULT_OK) {
-            val activity: String? = result.data?.getStringExtra(AddEditScheduleActivity.EXTRA_ACTIVITY)
-            val timeStart: String? = result.data?.getStringExtra(AddEditScheduleActivity.EXTRA_TIME_START)
-            val timeEnd: String? = result.data?.getStringExtra(AddEditScheduleActivity.EXTRA_TIME_END)
+            if (result.resultCode == Activity.RESULT_OK) {
+                val activity: String? =
+                    result.data?.getStringExtra(AddEditScheduleActivity.EXTRA_ACTIVITY)
+                val timeStart: String? =
+                    result.data?.getStringExtra(AddEditScheduleActivity.EXTRA_TIME_START)
+                val timeEnd: String? =
+                    result.data?.getStringExtra(AddEditScheduleActivity.EXTRA_TIME_END)
 
-            if (activity != null && timeStart != null && timeEnd != null) {
-                scheduleViewModel.insert(Schedule(day, activity, timeStart, timeEnd))
+                if (activity != null && timeStart != null && timeEnd != null) {
+                    scheduleViewModel.insert(Schedule(day, activity, timeStart, timeEnd))
 
-                toastMessage = getString(R.string.schedule_saved)
-            }
-        }
-
-        Toast.makeText(context, toastMessage, Toast.LENGTH_SHORT).show()
-    }
-
-    private val getEditedSchedule = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            result: ActivityResult ->
-        var toastMessage: String = getString(R.string.schedule_not_edited)
-
-        if (result.resultCode == Activity.RESULT_OK) {
-            val id: Int? = result.data?.getIntExtra(AddEditScheduleActivity.EXTRA_ID, -1)
-            val activity: String? = result.data?.getStringExtra(AddEditScheduleActivity.EXTRA_ACTIVITY)
-            val timeStart: String? = result.data?.getStringExtra(AddEditScheduleActivity.EXTRA_TIME_START)
-            val timeEnd: String? = result.data?.getStringExtra(AddEditScheduleActivity.EXTRA_TIME_END)
-
-            if (id != null && activity != null && timeStart != null && timeEnd != null) {
-                if (id != -1) {
-                    val schedule = Schedule(day, activity, timeStart, timeEnd)
-                    schedule.id = id
-                    scheduleViewModel.update(schedule)
-
-                    toastMessage = getString(R.string.schedule_updated)
+                    toastMessage = getString(R.string.schedule_saved)
                 }
-                else
-                    toastMessage = getString(R.string.cant_update_schedule)
             }
+
+            Toast.makeText(context, toastMessage, Toast.LENGTH_SHORT).show()
         }
 
-        Toast.makeText(context, toastMessage, Toast.LENGTH_SHORT).show()
-    }
+    private val getEditedSchedule =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            var toastMessage: String = getString(R.string.schedule_not_edited)
+
+            if (result.resultCode == Activity.RESULT_OK) {
+                val id: Int? = result.data?.getIntExtra(AddEditScheduleActivity.EXTRA_ID, -1)
+                val activity: String? =
+                    result.data?.getStringExtra(AddEditScheduleActivity.EXTRA_ACTIVITY)
+                val timeStart: String? =
+                    result.data?.getStringExtra(AddEditScheduleActivity.EXTRA_TIME_START)
+                val timeEnd: String? =
+                    result.data?.getStringExtra(AddEditScheduleActivity.EXTRA_TIME_END)
+
+                if (id != null && activity != null && timeStart != null && timeEnd != null) {
+                    if (id != -1) {
+                        val schedule = Schedule(day, activity, timeStart, timeEnd)
+                        schedule.id = id
+                        scheduleViewModel.update(schedule)
+
+                        toastMessage = getString(R.string.schedule_updated)
+                    } else
+                        toastMessage = getString(R.string.cant_update_schedule)
+                }
+            }
+
+            Toast.makeText(context, toastMessage, Toast.LENGTH_SHORT).show()
+        }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding =  FragmentDayScheduleBinding.inflate(inflater, container, false)
+        _binding = FragmentDayScheduleBinding.inflate(inflater, container, false)
         val root = binding.root
 
         prepareScheduleRecyclerView()
@@ -96,10 +101,10 @@ class DayScheduleFragment : Fragment() {
 
         scheduleAdapter = ScheduleAdapter(requireContext(),
             object : ScheduleAdapter.OptionsMenuClickListener {
-            override fun onOptionsMenuClicked(position: Int) {
-                showOptionsMenu(position)
-            }
-        })
+                override fun onOptionsMenuClicked(position: Int) {
+                    showOptionsMenu(position)
+                }
+            })
         binding.recyclerViewSchedule.adapter = scheduleAdapter
     }
 
@@ -177,7 +182,7 @@ class DayScheduleFragment : Fragment() {
             "com.sweak.teacherhelper.features.dayschedule.DayScheduleFragment.FRAGMENT_ARGUMENT_DAY"
 
         @JvmStatic
-        fun newInstance(bundle: Bundle) : DayScheduleFragment {
+        fun newInstance(bundle: Bundle): DayScheduleFragment {
             val fragment = DayScheduleFragment()
             fragment.arguments = bundle
             return fragment

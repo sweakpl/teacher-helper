@@ -8,12 +8,11 @@ import com.sweak.teacherhelper.features.dayschedule.DayScheduleFragment.Companio
 
 const val SCHEDULE_SCREEN_PAGE_NUMBER = 5
 
-class SchedulePagerAdapter(fragment: Fragment)
-    : FragmentStateAdapter(fragment) {
+class SchedulePagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 
     override fun createFragment(position: Int): Fragment {
         val bundle = Bundle()
-        when(position) {
+        when (position) {
             0 -> bundle.putString(FRAGMENT_ARGUMENT_DAY, MONDAY)
             1 -> bundle.putString(FRAGMENT_ARGUMENT_DAY, TUESDAY)
             2 -> bundle.putString(FRAGMENT_ARGUMENT_DAY, WEDNESDAY)

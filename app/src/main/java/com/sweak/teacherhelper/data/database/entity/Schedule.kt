@@ -9,8 +9,8 @@ data class Schedule(
     var day: String,
     var activity: String,
     @ColumnInfo(name = "time_start") var timeStart: String,
-    @ColumnInfo(name = "time_end") var timeEnd: String) {
-
+    @ColumnInfo(name = "time_end") var timeEnd: String
+) {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
 }

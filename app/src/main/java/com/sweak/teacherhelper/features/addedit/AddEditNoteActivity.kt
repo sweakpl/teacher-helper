@@ -44,8 +44,10 @@ class AddEditNoteActivity : AppCompatActivity() {
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean = when(item.itemId) {
-        R.id.save -> {saveNote(); true}
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
+        R.id.save -> {
+            saveNote(); true
+        }
         else -> super.onOptionsItemSelected(item)
     }
 
@@ -54,7 +56,11 @@ class AddEditNoteActivity : AppCompatActivity() {
         val description: String = binding.textInputDescription.editText!!.text.toString().trim()
 
         if (title.isEmpty() || description.isEmpty()) {
-            Toast.makeText(this, getString(R.string.insert_title_and_description), Toast.LENGTH_LONG).show()
+            Toast.makeText(
+                this,
+                getString(R.string.insert_title_and_description),
+                Toast.LENGTH_LONG
+            ).show()
             return
         }
 

@@ -10,10 +10,10 @@ import com.sweak.teacherhelper.features.weekschedule.WeekScheduleFragment
 
 const val MAIN_SCREEN_PAGE_NUMBER = 3
 
-class SectionsPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle)
-    : FragmentStateAdapter(fragmentManager, lifecycle) {
+class SectionsPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
+    FragmentStateAdapter(fragmentManager, lifecycle) {
 
-    override fun createFragment(position: Int): Fragment = when(position) {
+    override fun createFragment(position: Int): Fragment = when (position) {
         0 -> NoteFragment.newInstance()
         1 -> WeekScheduleFragment.newInstance()
         2 -> GroupFragment.newInstance()

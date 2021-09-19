@@ -30,8 +30,8 @@ class GroupAdapter(
     }
 
     override fun onBindViewHolder(holder: GroupHolder, position: Int) {
-        with (holder) {
-            with (getItem(holder.absoluteAdapterPosition)) {
+        with(holder) {
+            with(getItem(holder.absoluteAdapterPosition)) {
                 binding.textViewGroupName.text = this.name
 
                 binding.textViewGroupOptions.setOnClickListener {
@@ -53,6 +53,7 @@ class GroupAdapter(
                 override fun areItemsTheSame(oldItem: Group, newItem: Group): Boolean {
                     return oldItem.id == newItem.id
                 }
+
                 override fun areContentsTheSame(oldItem: Group, newItem: Group): Boolean {
                     return oldItem.name == newItem.name
                 }

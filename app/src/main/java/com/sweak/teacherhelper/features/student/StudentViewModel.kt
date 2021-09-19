@@ -12,7 +12,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class StudentViewModel @Inject constructor(
-    val repository: StudentRepository) : ViewModel() {
+    val repository: StudentRepository
+) : ViewModel() {
 
     lateinit var allStudents: LiveData<List<Student>>
 

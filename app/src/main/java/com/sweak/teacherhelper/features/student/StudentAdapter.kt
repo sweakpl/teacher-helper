@@ -14,7 +14,7 @@ class StudentAdapter(
     private val context: Context,
     private var itemClickListener: ItemClickListener,
     private var optionsMenuClickListener: OptionsMenuClickListener
-) : ListAdapter<Student, StudentAdapter.StudentHolder>(DIFF_CALLBACK)  {
+) : ListAdapter<Student, StudentAdapter.StudentHolder>(DIFF_CALLBACK) {
 
     class StudentHolder(val binding: StudentItemBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -33,8 +33,8 @@ class StudentAdapter(
     }
 
     override fun onBindViewHolder(holder: StudentHolder, position: Int) {
-        with (holder) {
-            with (getItem(holder.absoluteAdapterPosition)) {
+        with(holder) {
+            with(getItem(holder.absoluteAdapterPosition)) {
                 binding.textViewStudentFullName.text =
                     context.getString(R.string.full_name_template, this.firstName, this.lastName)
                 binding.textViewStudentDetails.text = this.className
@@ -58,6 +58,7 @@ class StudentAdapter(
                 override fun areItemsTheSame(oldItem: Student, newItem: Student): Boolean {
                     return oldItem.id == newItem.id
                 }
+
                 override fun areContentsTheSame(oldItem: Student, newItem: Student): Boolean {
                     return (oldItem.firstName == newItem.firstName) and
                             (oldItem.lastName == newItem.lastName) and

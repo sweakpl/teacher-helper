@@ -7,8 +7,8 @@ import com.sweak.teacherhelper.data.database.entity.Group
 import javax.inject.Inject
 
 class GroupRepository @Inject constructor(
-    private val groupDao: GroupDao) {
-
+    private val groupDao: GroupDao
+) {
     val allGroups: LiveData<List<Group>> = groupDao.getAll()
 
     fun insert(group: Group) {

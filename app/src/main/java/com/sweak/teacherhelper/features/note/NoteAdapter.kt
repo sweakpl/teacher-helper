@@ -25,8 +25,8 @@ class NoteAdapter(
     }
 
     override fun onBindViewHolder(holder: NoteHolder, position: Int) {
-        with (holder) {
-            with (getItem(holder.absoluteAdapterPosition)) {
+        with(holder) {
+            with(getItem(holder.absoluteAdapterPosition)) {
                 binding.textViewNoteTitle.text = this.title
                 binding.textViewNoteDescription.text = this.description
 
@@ -45,6 +45,7 @@ class NoteAdapter(
                 override fun areItemsTheSame(oldItem: Note, newItem: Note): Boolean {
                     return oldItem.id == newItem.id
                 }
+
                 override fun areContentsTheSame(oldItem: Note, newItem: Note): Boolean {
                     return (oldItem.title == newItem.title) and
                             (oldItem.description == newItem.description)

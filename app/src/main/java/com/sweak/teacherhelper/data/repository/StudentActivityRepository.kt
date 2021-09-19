@@ -7,8 +7,8 @@ import com.sweak.teacherhelper.data.database.entity.StudentActivity
 import javax.inject.Inject
 
 class StudentActivityRepository @Inject constructor(
-    private val studentActivityDao: StudentActivityDao) {
-
+    private val studentActivityDao: StudentActivityDao
+) {
     fun geAllStudentActivities(studentId: Int): LiveData<List<StudentActivity>> =
         studentActivityDao.getAllWithId(studentId)
 

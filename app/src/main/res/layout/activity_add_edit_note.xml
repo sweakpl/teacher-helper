@@ -16,8 +16,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
-            android:hint="@string/hint_title"/>
+            android:hint="@string/hint_title"
+            android:inputType="text" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -30,8 +30,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
-            android:hint="@string/hint_description"/>
+            android:hint="@string/hint_description"
+            android:inputType="text" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

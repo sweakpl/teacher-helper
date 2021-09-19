@@ -28,11 +28,11 @@ class ScheduleAdapter(
     }
 
     override fun onBindViewHolder(holder: ScheduleHolder, position: Int) {
-        with (holder) {
-            with (getItem(holder.absoluteAdapterPosition)) {
+        with(holder) {
+            with(getItem(holder.absoluteAdapterPosition)) {
                 binding.textViewScheduleActivity.text = this.activity
                 binding.textViewScheduleTime.text =
-                    context.getString(R.string.schedule_time_template, this.timeStart,this.timeEnd)
+                    context.getString(R.string.schedule_time_template, this.timeStart, this.timeEnd)
 
                 binding.textViewScheduleOptions.setOnClickListener {
                     optionsMenuClickListener.onOptionsMenuClicked(holder.absoluteAdapterPosition)
@@ -49,6 +49,7 @@ class ScheduleAdapter(
                 override fun areItemsTheSame(oldItem: Schedule, newItem: Schedule): Boolean {
                     return oldItem.id == newItem.id
                 }
+
                 override fun areContentsTheSame(oldItem: Schedule, newItem: Schedule): Boolean {
                     return (oldItem.activity == newItem.activity) and
                             (oldItem.day == newItem.day) and

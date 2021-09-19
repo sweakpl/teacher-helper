@@ -6,16 +6,20 @@ import androidx.room.ForeignKey
 import androidx.room.ForeignKey.CASCADE
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "student_activities",
-    foreignKeys = [ForeignKey(entity = Student::class,
+@Entity(
+    tableName = "student_activities",
+    foreignKeys = [ForeignKey(
+        entity = Student::class,
         parentColumns = ["id"],
         childColumns = ["student_id"],
         onUpdate = CASCADE,
         onDelete = CASCADE
-    )])
+    )]
+)
 data class StudentActivity(
     @ColumnInfo(name = "activity_type") var activityType: String,
-    @ColumnInfo(name = "student_id") var studentId: Int) {
+    @ColumnInfo(name = "student_id") var studentId: Int
+) {
 
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0

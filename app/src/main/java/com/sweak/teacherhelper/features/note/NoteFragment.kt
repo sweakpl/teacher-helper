@@ -28,54 +28,56 @@ class NoteFragment : Fragment() {
     private val noteViewModel: NoteViewModel by viewModels()
     private lateinit var noteAdapter: NoteAdapter
     private var _binding: FragmentNoteBinding? = null
+
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
 
-    private val getNewNote = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-        result: ActivityResult ->
-        var toastMessage: String = getString(R.string.note_not_saved)
+    private val getNewNote =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            var toastMessage: String = getString(R.string.note_not_saved)
 
-        if (result.resultCode == RESULT_OK) {
-            val title: String? = result.data?.getStringExtra(AddEditNoteActivity.EXTRA_TITLE)
-            val description: String? = result.data?.getStringExtra(AddEditNoteActivity.EXTRA_DESCRIPTION)
+            if (result.resultCode == RESULT_OK) {
+                val title: String? = result.data?.getStringExtra(AddEditNoteActivity.EXTRA_TITLE)
+                val description: String? =
+                    result.data?.getStringExtra(AddEditNoteActivity.EXTRA_DESCRIPTION)
 
-            if (title != null && description != null) {
-                noteViewModel.insert(Note(title, description))
-                toastMessage = getString(R.string.note_saved)
-            }
-        }
-
-        Toast.makeText(context, toastMessage, Toast.LENGTH_SHORT).show()
-    }
-
-    private val getEditedNote = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-        result: ActivityResult ->
-        var toastMessage: String = getString(R.string.note_not_edited)
-
-        if (result.resultCode == RESULT_OK) {
-            val id: Int? = result.data?.getIntExtra(AddEditNoteActivity.EXTRA_ID, -1)
-            val title: String? = result.data?.getStringExtra(AddEditNoteActivity.EXTRA_TITLE)
-            val description: String? = result.data?.getStringExtra(AddEditNoteActivity.EXTRA_DESCRIPTION)
-
-            if (id != null && title != null && description != null) {
-                if (id != -1) {
-                    val note = Note(title, description)
-                    note.id = id
-                    noteViewModel.update(note)
-
-                    toastMessage = getString(R.string.note_updated)
+                if (title != null && description != null) {
+                    noteViewModel.insert(Note(title, description))
+                    toastMessage = getString(R.string.note_saved)
                 }
             }
-            else
-                toastMessage = getString(R.string.cant_update_note)
+
+            Toast.makeText(context, toastMessage, Toast.LENGTH_SHORT).show()
         }
 
-        Toast.makeText(context, toastMessage, Toast.LENGTH_SHORT).show()
-    }
+    private val getEditedNote =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            var toastMessage: String = getString(R.string.note_not_edited)
+
+            if (result.resultCode == RESULT_OK) {
+                val id: Int? = result.data?.getIntExtra(AddEditNoteActivity.EXTRA_ID, -1)
+                val title: String? = result.data?.getStringExtra(AddEditNoteActivity.EXTRA_TITLE)
+                val description: String? =
+                    result.data?.getStringExtra(AddEditNoteActivity.EXTRA_DESCRIPTION)
+
+                if (id != null && title != null && description != null) {
+                    if (id != -1) {
+                        val note = Note(title, description)
+                        note.id = id
+                        noteViewModel.update(note)
+
+                        toastMessage = getString(R.string.note_updated)
+                    }
+                } else
+                    toastMessage = getString(R.string.cant_update_note)
+            }
+
+            Toast.makeText(context, toastMessage, Toast.LENGTH_SHORT).show()
+        }
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
         super.onCreateView(inflater, container, savedInstanceState)
 

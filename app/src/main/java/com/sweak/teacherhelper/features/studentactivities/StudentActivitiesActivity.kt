@@ -85,7 +85,8 @@ class StudentActivitiesActivity : AppCompatActivity() {
 
     private fun setViewModelDataObserver() {
         studentActivitiesViewModel.initializeAllStudentActivities(
-            intent.getIntExtra(StudentActivity.EXTRA_STUDENT_ID, -1))
+            intent.getIntExtra(StudentActivity.EXTRA_STUDENT_ID, -1)
+        )
 
         studentActivitiesViewModel.allStudentActivities.observe(this, { students ->
             studentActivitiesAdapter.submitList(students)
