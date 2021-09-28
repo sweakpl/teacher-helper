@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.sweak.teacherhelper.R
 import com.sweak.teacherhelper.data.database.entity.Schedule
 import com.sweak.teacherhelper.databinding.FragmentDayScheduleBinding
-import com.sweak.teacherhelper.features.addedit.AddEditScheduleActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

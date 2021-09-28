@@ -1,4 +1,4 @@
-package com.sweak.teacherhelper.features.addedit
+package com.sweak.teacherhelper.features.dayschedule
 
 import android.app.TimePickerDialog
 import android.content.Intent
@@ -126,12 +126,12 @@ class AddEditScheduleActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_ID: String =
-            "com.sweak.teacherhelper.features.addedit.AddEditScheduleActivity.EXTRA_ID"
+            "com.sweak.teacherhelper.features.dayschedule.AddEditScheduleActivity.EXTRA_ID"
         const val EXTRA_ACTIVITY: String =
-            "com.sweak.teacherhelper.features.addedit.AddEditScheduleActivity.EXTRA_ACTIVITY"
+            "com.sweak.teacherhelper.features.dayschedule.AddEditScheduleActivity.EXTRA_ACTIVITY"
         const val EXTRA_TIME_START: String =
-            "com.sweak.teacherhelper.features.addedit.AddEditScheduleActivity.EXTRA_TIME_START"
+            "com.sweak.teacherhelper.features.dayschedule.AddEditScheduleActivity.EXTRA_TIME_START"
         const val EXTRA_TIME_END: String =
-            "com.sweak.teacherhelper.features.addedit.AddEditScheduleActivity.EXTRA_TIME_END"
+            "com.sweak.teacherhelper.features.dayschedule.AddEditScheduleActivity.EXTRA_TIME_END"
     }
 }

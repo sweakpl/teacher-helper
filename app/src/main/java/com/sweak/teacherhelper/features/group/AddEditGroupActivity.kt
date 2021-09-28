@@ -1,4 +1,4 @@
-package com.sweak.teacherhelper.features.addedit
+package com.sweak.teacherhelper.features.group
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

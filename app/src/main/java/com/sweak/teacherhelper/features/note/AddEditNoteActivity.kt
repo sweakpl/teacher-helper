@@ -1,4 +1,4 @@
-package com.sweak.teacherhelper.features.addedit
+package com.sweak.teacherhelper.features.note
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -79,10 +79,10 @@ class AddEditNoteActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_ID: String =
-            "com.sweak.teacherhelper.features.addedit.AddEditNoteActivity.EXTRA_ID"
+            "com.sweak.teacherhelper.features.note.AddEditNoteActivity.EXTRA_ID"
         const val EXTRA_TITLE: String =
-            "com.sweak.teacherhelper.features.addedit.AddEditNoteActivity.EXTRA_TITLE"
+            "com.sweak.teacherhelper.features.note.AddEditNoteActivity.EXTRA_TITLE"
         const val EXTRA_DESCRIPTION: String =
-            "com.sweak.teacherhelper.features.addedit.AddEditNoteActivity.EXTRA_DESCRIPTION"
+            "com.sweak.teacherhelper.features.note.AddEditNoteActivity.EXTRA_DESCRIPTION"
     }
 }

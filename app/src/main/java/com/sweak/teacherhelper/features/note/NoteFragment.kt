@@ -14,12 +14,10 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sweak.teacherhelper.R
 import com.sweak.teacherhelper.data.database.entity.Note
 import com.sweak.teacherhelper.databinding.FragmentNoteBinding
-import com.sweak.teacherhelper.features.addedit.AddEditNoteActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

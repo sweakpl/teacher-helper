@@ -21,20 +21,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".features.addedit.AddEditGroupActivity"
+            android:name=".features.group.AddEditGroupActivity"
             android:parentActivityName=".features.main.MainActivity" />
         <activity
-            android:name=".features.addedit.AddEditScheduleActivity"
+            android:name=".features.dayschedule.AddEditScheduleActivity"
             android:parentActivityName=".features.main.MainActivity" />
         <activity
-            android:name=".features.addedit.AddEditNoteActivity"
+            android:name=".features.note.AddEditNoteActivity"
             android:parentActivityName=".features.main.MainActivity" />
         <activity
             android:name=".features.student.StudentActivity"
             android:launchMode="singleTop"
             android:parentActivityName=".features.main.MainActivity" />
         <activity
-            android:name=".features.addedit.AddEditStudentActivity"
+            android:name=".features.student.AddEditStudentActivity"
             android:parentActivityName=".features.student.StudentActivity" />
         <activity
             android:name=".features.studentcontrol.StudentControlActivity"
